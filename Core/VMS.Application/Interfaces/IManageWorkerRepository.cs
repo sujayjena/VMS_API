@@ -1,0 +1,18 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using VMS.Application.Models;
+
+namespace VMS.Application.Interfaces
+{
+    public interface IManageWorkerRepository
+    {
+        Task<int> SaveWorker(Worker_Request parameters);
+        Task<IEnumerable<Worker_Response>> GetWorkerList(WorkerSearch_Request parameters);
+        Task<Worker_Response?> GetWorkerById(int Id);
+        Task<int> SaveWorkerPass(WorkerPass_Request parameters);
+        Task<IEnumerable<WorkerPass_Response>> GetWorkerPassList(WorkerPassSearch_Request parameters);
+    }
+}
