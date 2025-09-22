@@ -506,4 +506,38 @@ namespace VMS.Application.Models
         public bool? IsActive { get; set; }
     }
     #endregion
+
+    #region Transporter Type
+    public class TransporterType_Request : BaseEntity
+    {
+        [DefaultValue("")]
+        public string? TransporterType { get; set; }
+
+        public bool? IsActive { get; set; }
+    }
+
+    public class TransporterType_Response : BaseResponseEntity
+    {
+        public string? TransporterType { get; set; }
+
+        public bool? IsActive { get; set; }
+    }
+    #endregion
+
+    #region Building Name
+    public class BuildingName_Request : BaseEntity
+    {
+        [DefaultValue("")]
+        public string? BuildingName { get; set; }
+        public int? NoofRooms { get; set; }
+        public bool? IsActive { get; set; }
+    }
+
+    public class BuildingName_Response : BaseResponseEntity
+    {
+        public string? BuildingName { get; set; }
+        public int? NoofRooms { get; set; }
+        public bool? IsActive { get; set; }
+    }
+    #endregion
 }

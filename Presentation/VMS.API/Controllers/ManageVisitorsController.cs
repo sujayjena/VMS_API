@@ -406,7 +406,14 @@ namespace VMS.API.Controllers
                 }
                 else
                 {
-                     _response.Message = "Visitor Approved successfully";
+                    if (parameters.StatusId == 2)
+                    {
+                        _response.Message = "Visitor Approved successfully";
+                    }
+                    else if (parameters.StatusId == 3)
+                    {
+                        _response.Message = "Visitor Reject successfully";
+                    }
 
                     //Send Email
                     if (parameters.Id > 0)

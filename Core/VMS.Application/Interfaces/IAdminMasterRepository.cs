@@ -197,5 +197,23 @@ namespace VMS.Application.Interfaces
         Task<WorkPlace_Response?> GetWorkPlaceById(int Id);
 
         #endregion
+
+        #region Transporter Type
+        Task<int> SaveTransporterType(TransporterType_Request parameters);
+
+        Task<IEnumerable<TransporterType_Response>> GetTransporterTypeList(BaseSearchEntity parameters);
+
+        Task<TransporterType_Response?> GetTransporterTypeById(int Id);
+
+        #endregion
+
+        #region Building Name
+        Task<int> SaveBuildingName(BuildingName_Request parameters);
+
+        Task<IEnumerable<BuildingName_Response>> GetBuildingNameList(BaseSearchEntity parameters);
+
+        Task<BuildingName_Response?> GetBuildingNameById(int Id);
+
+        #endregion
     }
 }

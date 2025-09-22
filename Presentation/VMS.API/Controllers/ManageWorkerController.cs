@@ -39,6 +39,7 @@ namespace VMS.API.Controllers
         [HttpPost]
         public async Task<ResponseModel> SaveWorker(Worker_Request parameters)
         {
+            /*
             #region User Restriction 
 
             int vNoofContractedWorker = 0;
@@ -80,6 +81,7 @@ namespace VMS.API.Controllers
             }
 
             #endregion
+            */
 
             //Document Upload
             if (parameters != null && !string.IsNullOrWhiteSpace(parameters.Document_Base64))

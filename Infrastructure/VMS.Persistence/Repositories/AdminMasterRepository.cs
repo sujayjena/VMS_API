@@ -927,5 +927,80 @@ namespace VMS.Persistence.Repositories
         }
 
         #endregion
+
+        #region Transporter Type
+        public async Task<int> SaveTransporterType(TransporterType_Request parameters)
+        {
+            DynamicParameters queryParameters = new DynamicParameters();
+            queryParameters.Add("@Id", parameters.Id);
+            queryParameters.Add("@TransporterType", parameters.TransporterType);
+            queryParameters.Add("@IsActive", parameters.IsActive);
+            queryParameters.Add("@UserId", SessionManager.LoggedInUserId);
+
+            return await SaveByStoredProcedure<int>("SaveTransporterType", queryParameters);
+        }
+
+        public async Task<IEnumerable<TransporterType_Response>> GetTransporterTypeList(BaseSearchEntity parameters)
+        {
+            DynamicParameters queryParameters = new DynamicParameters();
+            queryParameters.Add("@SearchText", parameters.SearchText.SanitizeValue());
+            queryParameters.Add("@IsActive", parameters.IsActive);
+            queryParameters.Add("@PageNo", parameters.PageNo);
+            queryParameters.Add("@PageSize", parameters.PageSize);
+            queryParameters.Add("@Total", parameters.Total, null, System.Data.ParameterDirection.Output);
+            queryParameters.Add("@UserId", SessionManager.LoggedInUserId);
+
+            var result = await ListByStoredProcedure<TransporterType_Response>("GetTransporterTypeList", queryParameters);
+            parameters.Total = queryParameters.Get<int>("Total");
+
+            return result;
+        }
+
+        public async Task<TransporterType_Response?> GetTransporterTypeById(int Id)
+        {
+            DynamicParameters queryParameters = new DynamicParameters();
+            queryParameters.Add("@Id", Id);
+            return (await ListByStoredProcedure<TransporterType_Response>("GetTransporterTypeById", queryParameters)).FirstOrDefault();
+        }
+
+        #endregion
+
+        #region Building Name
+        public async Task<int> SaveBuildingName(BuildingName_Request parameters)
+        {
+            DynamicParameters queryParameters = new DynamicParameters();
+            queryParameters.Add("@Id", parameters.Id);
+            queryParameters.Add("@BuildingName", parameters.BuildingName);
+            queryParameters.Add("@NoofRooms", parameters.NoofRooms);
+            queryParameters.Add("@IsActive", parameters.IsActive);
+            queryParameters.Add("@UserId", SessionManager.LoggedInUserId);
+
+            return await SaveByStoredProcedure<int>("SaveBuildingName", queryParameters);
+        }
+
+        public async Task<IEnumerable<BuildingName_Response>> GetBuildingNameList(BaseSearchEntity parameters)
+        {
+            DynamicParameters queryParameters = new DynamicParameters();
+            queryParameters.Add("@SearchText", parameters.SearchText.SanitizeValue());
+            queryParameters.Add("@IsActive", parameters.IsActive);
+            queryParameters.Add("@PageNo", parameters.PageNo);
+            queryParameters.Add("@PageSize", parameters.PageSize);
+            queryParameters.Add("@Total", parameters.Total, null, System.Data.ParameterDirection.Output);
+            queryParameters.Add("@UserId", SessionManager.LoggedInUserId);
+
+            var result = await ListByStoredProcedure<BuildingName_Response>("GetBuildingNameList", queryParameters);
+            parameters.Total = queryParameters.Get<int>("Total");
+
+            return result;
+        }
+
+        public async Task<BuildingName_Response?> GetBuildingNameById(int Id)
+        {
+            DynamicParameters queryParameters = new DynamicParameters();
+            queryParameters.Add("@Id", Id);
+            return (await ListByStoredProcedure<BuildingName_Response>("GetBuildingNameById", queryParameters)).FirstOrDefault();
+        }
+
+        #endregion
     }
 }

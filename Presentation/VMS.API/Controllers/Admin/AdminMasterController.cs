@@ -1471,5 +1471,131 @@ namespace VMS.API.Controllers.Admin
         }
 
         #endregion
+
+        #region Transporter Type
+
+        [Route("[action]")]
+        [HttpPost]
+        public async Task<ResponseModel> SaveTransporterType(TransporterType_Request parameters)
+        {
+            int result = await _adminMasterRepository.SaveTransporterType(parameters);
+
+            if (result == (int)SaveOperationEnums.NoRecordExists)
+            {
+                _response.Message = "No record exists";
+            }
+            else if (result == (int)SaveOperationEnums.ReocrdExists)
+            {
+                _response.Message = "Record is already exists";
+            }
+            else if (result == (int)SaveOperationEnums.NoResult)
+            {
+                _response.Message = "Something went wrong, please try again";
+            }
+            else
+            {
+                if (parameters.Id > 0)
+                {
+                    _response.Message = "Record updated successfully";
+                }
+                else
+                {
+                    _response.Message = "Record details saved successfully";
+                }
+            }
+            return _response;
+        }
+
+
+        [Route("[action]")]
+        [HttpPost]
+        public async Task<ResponseModel> GetTransporterTypeList(BaseSearchEntity parameters)
+        {
+            IEnumerable<TransporterType_Response> lstRoles = await _adminMasterRepository.GetTransporterTypeList(parameters);
+            _response.Data = lstRoles.ToList();
+            _response.Total = parameters.Total;
+            return _response;
+        }
+
+        [Route("[action]")]
+        [HttpPost]
+        public async Task<ResponseModel> GetTransporterTypeById(int Id)
+        {
+            if (Id <= 0)
+            {
+                _response.Message = "Id is required";
+            }
+            else
+            {
+                var vResultObj = await _adminMasterRepository.GetTransporterTypeById(Id);
+                _response.Data = vResultObj;
+            }
+            return _response;
+        }
+
+        #endregion
+
+        #region Building Name
+
+        [Route("[action]")]
+        [HttpPost]
+        public async Task<ResponseModel> SaveBuildingName(BuildingName_Request parameters)
+        {
+            int result = await _adminMasterRepository.SaveBuildingName(parameters);
+
+            if (result == (int)SaveOperationEnums.NoRecordExists)
+            {
+                _response.Message = "No record exists";
+            }
+            else if (result == (int)SaveOperationEnums.ReocrdExists)
+            {
+                _response.Message = "Record is already exists";
+            }
+            else if (result == (int)SaveOperationEnums.NoResult)
+            {
+                _response.Message = "Something went wrong, please try again";
+            }
+            else
+            {
+                if (parameters.Id > 0)
+                {
+                    _response.Message = "Record updated successfully";
+                }
+                else
+                {
+                    _response.Message = "Record details saved successfully";
+                }
+            }
+            return _response;
+        }
+
+
+        [Route("[action]")]
+        [HttpPost]
+        public async Task<ResponseModel> GetBuildingNameList(BaseSearchEntity parameters)
+        {
+            IEnumerable<BuildingName_Response> lstRoles = await _adminMasterRepository.GetBuildingNameList(parameters);
+            _response.Data = lstRoles.ToList();
+            _response.Total = parameters.Total;
+            return _response;
+        }
+
+        [Route("[action]")]
+        [HttpPost]
+        public async Task<ResponseModel> GetBuildingNameById(int Id)
+        {
+            if (Id <= 0)
+            {
+                _response.Message = "Id is required";
+            }
+            else
+            {
+                var vResultObj = await _adminMasterRepository.GetBuildingNameById(Id);
+                _response.Data = vResultObj;
+            }
+            return _response;
+        }
+
+        #endregion
     }
 }
