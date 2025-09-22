@@ -215,5 +215,14 @@ namespace VMS.Application.Interfaces
         Task<BuildingName_Response?> GetBuildingNameById(int Id);
 
         #endregion
+
+        #region Building Room Number
+        Task<int> SaveBuildingRoomNumber(BuildingRoomNumber_Request parameters);
+
+        Task<IEnumerable<BuildingRoomNumber_Response>> GetBuildingRoomNumberList(BaseSearchEntity parameters);
+
+        Task<BuildingRoomNumber_Response?> GetBuildingRoomNumberById(int Id);
+
+        #endregion
     }
 }

@@ -540,4 +540,31 @@ namespace VMS.Application.Models
         public bool? IsActive { get; set; }
     }
     #endregion
+
+    #region Building Room Number
+    public class BuildingRoomNumber_Request : BaseEntity
+    {
+        public int? BuildingNameId { get; set; }
+        public int? RoomNumber { get; set; }
+
+        [DefaultValue(false)]
+        public bool? IsPerson { get; set; }
+        public int? CountOfPerson { get; set; }
+
+        [DefaultValue(false)]
+        public bool? IsFamily { get; set; }
+        public bool? IsActive { get; set; }
+    }
+
+    public class BuildingRoomNumber_Response : BaseResponseEntity
+    {
+        public int? BuildingNameId { get; set; }
+        public string? BuildingName { get; set; }
+        public int? RoomNumber { get; set; }
+        public bool? IsPerson { get; set; }
+        public int? CountOfPerson { get; set; }
+        public bool? IsFamily { get; set; }
+        public bool? IsActive { get; set; }
+    }
+    #endregion
 }
