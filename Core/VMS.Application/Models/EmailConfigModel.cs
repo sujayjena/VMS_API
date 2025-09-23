@@ -60,6 +60,7 @@ namespace VMS.Application.Models
         [Required]
         [DefaultValue(false)]
         public bool IsSent { get; set; }
+        public string ErrorMessage { get; set; }
     }
 
     public class EmailNotification_Response : BaseResponseEntity
