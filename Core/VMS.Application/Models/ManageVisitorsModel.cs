@@ -128,6 +128,7 @@ namespace VMS.Application.Models
         public string? VehiclePhotoFileName { get; set; }
         public string? VehiclePhoto_Base64 { get; set; }
         public bool? IsMeetingOver { get; set; }
+        public int? VisitorTypeId { get; set; }
         public bool? IsActive { get; set; }
         public List<AssignGateNo_Request> GateNumberList { get; set; }
         public List<VisitorDocumentVerification_Request> DocumentVerificationList { get; set; }
@@ -220,7 +221,8 @@ namespace VMS.Application.Models
         public string? ApprovedReject_Remarks { get; set; }
         public bool? IsMeetingOver { get; set; }
         public DateTime? IsMeetingOverDateAndTime { get; set; }
-
+        public int? VisitorTypeId { get; set; }
+        public string? VisitorType { get; set; }
         public bool? IsActive { get; set; }
 
         public List<AssignGateNo_Response> GateNumberList { get; set; }

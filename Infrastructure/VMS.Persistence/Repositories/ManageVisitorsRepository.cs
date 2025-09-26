@@ -75,6 +75,7 @@ namespace VMS.Persistence.Repositories
             queryParameters.Add("@VehiclePhotoOriginalFileName", parameters.VehiclePhotoOriginalFileName);
             queryParameters.Add("@VehiclePhotoFileName", parameters.VehiclePhotoFileName);
             queryParameters.Add("@IsMeetingOver", parameters.IsMeetingOver);
+            queryParameters.Add("@VisitorTypeId", parameters.VisitorTypeId);
             queryParameters.Add("@IsActive", parameters.IsActive);
             queryParameters.Add("@UserId", SessionManager.LoggedInUserId);
 
