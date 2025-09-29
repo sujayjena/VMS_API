@@ -40,5 +40,6 @@ namespace VMS.Application.Interfaces
         Task<IEnumerable<MeetingPurposeLogHistory_Response>> GetMeetingPurposeLogHistoryList(MeetingPurposeLogHistory_Search parameters);
 
         Task<int> DeleteVisitorDocumentVerification(int Id);
+        Task<int> DeleteVisitorAsset(int Id);
     }
 }

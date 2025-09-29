@@ -366,5 +366,13 @@ namespace VMS.Persistence.Repositories
 
             return await SaveByStoredProcedure<int>("DeleteVisitorDocumentVerification", queryParameters);
         }
+        public async Task<int> DeleteVisitorAsset(int Id)
+        {
+            DynamicParameters queryParameters = new DynamicParameters();
+
+            queryParameters.Add("@Id", Id);
+
+            return await SaveByStoredProcedure<int>("DeleteVisitorAsset", queryParameters);
+        }
     }
 }

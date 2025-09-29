@@ -5,6 +5,7 @@ using VMS.Application.Models;
 using VMS.Persistence.Repositories;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using VMS.API.CustomAttributes;
 
 namespace VMS.API.Controllers.Admin
 {
@@ -59,6 +60,7 @@ namespace VMS.API.Controllers.Admin
 
         [Route("[action]")]
         [HttpPost]
+        [AllowAnonymous]
         public async Task<ResponseModel> GetDepartmentList(Department_Search parameters)
         {
             IEnumerable<Department_Response> lstRoles = await _profileRepository.GetDepartmentList(parameters);

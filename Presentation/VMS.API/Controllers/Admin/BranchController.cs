@@ -5,6 +5,7 @@ using VMS.Application.Models;
 using VMS.Persistence.Repositories;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using VMS.API.CustomAttributes;
 
 namespace VMS.API.Controllers.Admin
 {
@@ -108,6 +109,7 @@ namespace VMS.API.Controllers.Admin
 
         [Route("[action]")]
         [HttpPost]
+        [AllowAnonymous]
         public async Task<ResponseModel> GetBranchList(BranchSearch_Request parameters)
         {
             IEnumerable<Branch_Response> lstBranchs = await _branchRepository.GetBranchList(parameters);
