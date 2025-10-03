@@ -41,14 +41,10 @@ namespace VMS.Application.Models
         public int? DistrictId { get; set; }
         public string? Pincode { get; set; }
         public string? DocumentOriginalFileName { get; set; }
-
-        [JsonIgnore]
         public string? DocumentFileName { get; set; }
         public string? Document_Base64 { get; set; }
 
         public string? WorkerPhotoOriginalFileName { get; set; }
-
-        [JsonIgnore]
         public string? WorkerPhotoFileName { get; set; }
         public string? WorkerPhoto_Base64 { get; set; }
 

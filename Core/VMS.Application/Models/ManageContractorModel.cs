@@ -33,24 +33,20 @@ namespace VMS.Application.Models
         public int? DocumentTypeId { get; set; }
 
         public string? DocumentOriginalFileName { get; set; }
-        [JsonIgnore]
         public string? DocumentImage { get; set; }
         public string? DocumentImage_Base64 { get; set; }
 
         public string? ContractorPhotoOriginalFileName { get; set; }
-        [JsonIgnore]
         public string? ContractorPhoto { get; set; }
         public string? ContractorPhoto_Base64 { get; set; }
 
         public string? AadharCardNumber { get; set; }
         public string? AadharCardOriginalFileName { get; set; }
-        [JsonIgnore]
         public string? AadharCardFileName { get; set; }
         public string? AadharCard_Base64 { get; set; }
 
         public string? PanCardNumber { get; set; }
         public string? PanCardOriginalFileName { get; set; }
-        [JsonIgnore]
         public string? PanCardFileName { get; set; }
         public string? PanCard_Base64 { get; set; }
 
