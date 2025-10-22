@@ -120,6 +120,7 @@ namespace VMS.API.Controllers.Admin
 
         [Route("[action]")]
         [HttpPost]
+        [AllowAnonymous]
         public async Task<ResponseModel> GetBranchById(int Id)
         {
             if (Id <= 0)

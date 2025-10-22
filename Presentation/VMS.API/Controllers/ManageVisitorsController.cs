@@ -273,6 +273,7 @@ namespace VMS.API.Controllers
                                         sSMSTemplateContent = sSMSTemplateContent.Replace("{#var#}", vVisitor.VisitorName.ToString());
                                         sSMSTemplateContent = sSMSTemplateContent.Replace("{#var1#}", Convert.ToDateTime(vVisitor.VisitStartDate).ToString("dd/MM/yyyy"));
                                         sSMSTemplateContent = sSMSTemplateContent.Replace("{#var2#}", Convert.ToDateTime(vVisitor.VisitStartDate).ToString("hh:mm:ss:tt"));
+                                        sSMSTemplateContent = sSMSTemplateContent.Replace("{#var3#}", vConfigRefObj.Ref_Value3 + "" + parameters.Id);
 
                                         //StringBuilder sb = new StringBuilder();
                                         //sb.AppendFormat(sSMSTemplateContent, iOTP.ToString(), parameters.VisitNumber);
@@ -397,7 +398,6 @@ namespace VMS.API.Controllers
             return _response;
         }
 
-
         [Route("[action]")]
         [HttpPost]
         public async Task<ResponseModel> GetVisitorsList(Visitors_Search parameters)
@@ -415,6 +415,7 @@ namespace VMS.API.Controllers
 
         [Route("[action]")]
         [HttpPost]
+        [AllowAnonymous]
         public async Task<ResponseModel> GetVisitorsById(int Id)
         {
             if (Id <= 0)
@@ -511,14 +512,13 @@ namespace VMS.API.Controllers
                         _response.Message = "Visitor Reject successfully";
                     }
 
-                    //Send Email
+                    //Send Email to Security
                     if (parameters.Id > 0)
                     {
                         var vEmailEmp = await SendVisitorApproved_EmailToSecurity(Convert.ToInt32(parameters.Id));
                     }
 
-                    #region SMS Send
-
+                    #region Send SMS to Visitor
                     if (vVisitorResponse != null)
                     {
                         var vConfigRef_Search = new ConfigRef_Search()
@@ -541,6 +541,7 @@ namespace VMS.API.Controllers
                                 sSMSTemplateContent = sSMSTemplateContent.Replace("{#var#}", vVisitorResponse.VisitorName.ToString());
                                 sSMSTemplateContent = sSMSTemplateContent.Replace("{#var1#}", Convert.ToDateTime(vVisitorResponse.VisitStartDate).ToString("dd/MM/yyyy"));
                                 sSMSTemplateContent = sSMSTemplateContent.Replace("{#var2#}", Convert.ToDateTime(vVisitorResponse.VisitStartDate).ToString("hh:mm:ss:tt"));
+                                sSMSTemplateContent = sSMSTemplateContent.Replace("{#var3#}", vConfigRefObj.Ref_Value3 + "" + parameters.Id);
 
                                 //StringBuilder sb = new StringBuilder();
                                 //sb.AppendFormat(sSMSTemplateContent, iOTP.ToString(), parameters.VisitNumber);
