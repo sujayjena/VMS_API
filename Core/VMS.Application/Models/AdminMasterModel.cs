@@ -213,7 +213,7 @@ namespace VMS.Application.Models
 
         [DefaultValue("")]
         public string? Remarks { get; set; }
-
+        public string? BuildingName { get; set; }
         public bool? IsActive { get; set; }
     }
 
@@ -223,6 +223,7 @@ namespace VMS.Application.Models
         public int? GateNameId { get; set; }
         public string? GateName { get; set; }
         public string? Remarks { get; set; }
+        public string? BuildingName { get; set; }
         public bool? IsActive { get; set; }
     }
 

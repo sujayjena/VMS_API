@@ -401,6 +401,7 @@ namespace VMS.Persistence.Repositories
             queryParameters.Add("@GateNumber", parameters.GateNumber);
             queryParameters.Add("@GateNameId", parameters.GateNameId);
             queryParameters.Add("@Remarks", parameters.Remarks);
+            queryParameters.Add("@BuildingName", parameters.BuildingName);
             queryParameters.Add("@IsActive", parameters.IsActive);
             queryParameters.Add("@UserId", SessionManager.LoggedInUserId);
 
