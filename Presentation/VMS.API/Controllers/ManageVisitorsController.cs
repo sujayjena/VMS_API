@@ -982,17 +982,17 @@ namespace VMS.API.Controllers
                     WorkSheet1.Row(1).Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
                     WorkSheet1.Row(1).Style.Font.Bold = true;
 
-                    WorkSheet1.Cells[1, 1].Value = "Sr.No";
-                    WorkSheet1.Cells[1, 2].Value = "Visit ID";
-                    WorkSheet1.Cells[1, 3].Value = "Visit Name";
-                    WorkSheet1.Cells[1, 4].Value = "Visit Purpose";
-                    WorkSheet1.Cells[1, 5].Value = "Branch";
-                    WorkSheet1.Cells[1, 6].Value = "Department";
-                    WorkSheet1.Cells[1, 7].Value = "Gate No";
-                    WorkSheet1.Cells[1, 8].Value = "Status";
-                    WorkSheet1.Cells[1, 9].Value = "Remark";
-                    WorkSheet1.Cells[1, 10].Value = "Created Date";
-                    WorkSheet1.Cells[1, 11].Value = "Created By";
+                    WorkSheet1.Cells[1, 1].Value = "SR.NO";
+                    WorkSheet1.Cells[1, 2].Value = "VISIT ID";
+                    WorkSheet1.Cells[1, 3].Value = "VISIT NAME";
+                    WorkSheet1.Cells[1, 4].Value = "VISIT PURPOSE";
+                    WorkSheet1.Cells[1, 5].Value = "BRANCH";
+                    WorkSheet1.Cells[1, 6].Value = "DEPARTMENT";
+                    WorkSheet1.Cells[1, 7].Value = "GATE NO";
+                    WorkSheet1.Cells[1, 8].Value = "STATUS";
+                    WorkSheet1.Cells[1, 9].Value = "REMARK";
+                    WorkSheet1.Cells[1, 10].Value = "CREATED DATE";
+                    WorkSheet1.Cells[1, 11].Value = "CREATED BY";
 
                     recordIndex = 2;
 
@@ -1022,15 +1022,15 @@ namespace VMS.API.Controllers
                                     WorkSheet1.Cells[recordIndex, 1].Value = i + "." + j;
                                 }
                                 WorkSheet1.Cells[recordIndex, 2].Value = items.VisitNumber;
-                                WorkSheet1.Cells[recordIndex, 3].Value = items.VisitorName;
-                                WorkSheet1.Cells[recordIndex, 4].Value = items.VisitType;
-                                WorkSheet1.Cells[recordIndex, 5].Value = items.BranchName;
-                                WorkSheet1.Cells[recordIndex, 6].Value = items.DepartmentName;
+                                WorkSheet1.Cells[recordIndex, 3].Value = items.VisitorName == null ? "" : items.VisitorName.ToUpper();
+                                WorkSheet1.Cells[recordIndex, 4].Value = items.VisitType == null ? "" : items.VisitType.ToUpper();
+                                WorkSheet1.Cells[recordIndex, 5].Value = items.BranchName == null ? "" : items.BranchName.ToUpper();
+                                WorkSheet1.Cells[recordIndex, 6].Value = items.DepartmentName == null ? "" : items.DepartmentName.ToUpper();
                                 WorkSheet1.Cells[recordIndex, 7].Value = mitems.GateNumber;
-                                WorkSheet1.Cells[recordIndex, 8].Value = mitems.CheckedStatus;
-                                WorkSheet1.Cells[recordIndex, 9].Value = mitems.CheckedRemark;
+                                WorkSheet1.Cells[recordIndex, 8].Value = mitems.CheckedStatus == null ? "" : mitems.CheckedStatus.ToUpper();
+                                WorkSheet1.Cells[recordIndex, 9].Value = mitems.CheckedRemark == null ? "" : mitems.CheckedRemark.ToUpper();
                                 WorkSheet1.Cells[recordIndex, 10].Value = Convert.ToDateTime(mitems.CreatedDate).ToString("dd/MM/yyyy");
-                                WorkSheet1.Cells[recordIndex, 11].Value = mitems.CreatorName;
+                                WorkSheet1.Cells[recordIndex, 11].Value = mitems.CreatorName == null ? "" : mitems.CreatorName.ToUpper();
 
                                 recordIndex += 1;
 
@@ -1041,10 +1041,10 @@ namespace VMS.API.Controllers
                         {
                             WorkSheet1.Cells[recordIndex, 1].Value = i.ToString();
                             WorkSheet1.Cells[recordIndex, 2].Value = items.VisitNumber;
-                            WorkSheet1.Cells[recordIndex, 3].Value = items.VisitorName;
-                            WorkSheet1.Cells[recordIndex, 4].Value = items.VisitType;
-                            WorkSheet1.Cells[recordIndex, 5].Value = items.BranchName;
-                            WorkSheet1.Cells[recordIndex, 6].Value = items.DepartmentName;
+                            WorkSheet1.Cells[recordIndex, 3].Value = items.VisitorName == null ? "" : items.VisitorName.ToUpper();
+                            WorkSheet1.Cells[recordIndex, 4].Value = items.VisitType == null ? "" : items.VisitType.ToUpper();
+                            WorkSheet1.Cells[recordIndex, 5].Value = items.BranchName == null ? "" : items.BranchName.ToUpper();
+                            WorkSheet1.Cells[recordIndex, 6].Value = items.DepartmentName == null ? "" : items.DepartmentName.ToUpper();
 
                             recordIndex += 1;
                         }
@@ -1066,15 +1066,15 @@ namespace VMS.API.Controllers
                                 WorkSheet1.Cells[recordIndex, 1].Value = i + "." + k;
                             }
                             WorkSheet1.Cells[recordIndex, 2].Value = items.VisitNumber;
-                            WorkSheet1.Cells[recordIndex, 3].Value = items.VisitorName;
-                            WorkSheet1.Cells[recordIndex, 4].Value = items.VisitType;
-                            WorkSheet1.Cells[recordIndex, 5].Value = items.BranchName;
-                            WorkSheet1.Cells[recordIndex, 6].Value = items.DepartmentName;
+                            WorkSheet1.Cells[recordIndex, 3].Value = items.VisitorName == null ? "" : items.VisitorName.ToUpper();
+                            WorkSheet1.Cells[recordIndex, 4].Value = items.VisitType == null ? "" : items.VisitType.ToUpper();
+                            WorkSheet1.Cells[recordIndex, 5].Value = items.BranchName == null ? "" : items.BranchName.ToUpper();
+                            WorkSheet1.Cells[recordIndex, 6].Value = items.DepartmentName == null ? "" : items.DepartmentName.ToUpper();
                             WorkSheet1.Cells[recordIndex, 7].Value = mitems.GateNumber;
-                            WorkSheet1.Cells[recordIndex, 8].Value = ((mitems.IsMeetingOver == false || mitems.IsMeetingOver == null) ? "Start" : "Meeting Over");
+                            WorkSheet1.Cells[recordIndex, 8].Value = ((mitems.IsMeetingOver == false || mitems.IsMeetingOver == null) ? "START" : "MEETING OVER");
                             WorkSheet1.Cells[recordIndex, 9].Value = "";
                             WorkSheet1.Cells[recordIndex, 10].Value = Convert.ToDateTime(mitems.CreatedDate).ToString("dd/MM/yyyy");
-                            WorkSheet1.Cells[recordIndex, 11].Value = mitems.CreatorName;
+                            WorkSheet1.Cells[recordIndex, 11].Value = mitems.CreatorName == null ? "" : mitems.CreatorName.ToUpper();
 
                             recordIndex += 1;
 

@@ -914,53 +914,53 @@ namespace VMS.API.Controllers.Admin
                     WorkSheet1.Row(1).Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
                     WorkSheet1.Row(1).Style.Font.Bold = true;
 
-                    WorkSheet1.Cells[1, 1].Value = "User Code";
-                    WorkSheet1.Cells[1, 2].Value = "User Name";
-                    WorkSheet1.Cells[1, 3].Value = "User Type";
-                    WorkSheet1.Cells[1, 4].Value = "Mobile";
-                    WorkSheet1.Cells[1, 5].Value = "EmailId";
-                    WorkSheet1.Cells[1, 6].Value = "Gate Number";
-                    WorkSheet1.Cells[1, 7].Value = "Role";
-                    WorkSheet1.Cells[1, 8].Value = "ReportingTo";
-                    WorkSheet1.Cells[1, 9].Value = "Department";
-                    WorkSheet1.Cells[1, 10].Value = "Company";
-                    WorkSheet1.Cells[1, 11].Value = "DateOfBirth";
-                    WorkSheet1.Cells[1, 12].Value = "Date Of Joining";
-                    WorkSheet1.Cells[1, 13].Value = "Blood Group";
-                    WorkSheet1.Cells[1, 14].Value = "Gender";
-                    WorkSheet1.Cells[1, 15].Value = "Marital Status";
+                    WorkSheet1.Cells[1, 1].Value = "USER CODE";
+                    WorkSheet1.Cells[1, 2].Value = "USER NAME";
+                    WorkSheet1.Cells[1, 3].Value = "USER TYPE";
+                    WorkSheet1.Cells[1, 4].Value = "MOBILE";
+                    WorkSheet1.Cells[1, 5].Value = "EMAILID";
+                    WorkSheet1.Cells[1, 6].Value = "GATE NUMBER";
+                    WorkSheet1.Cells[1, 7].Value = "ROLE";
+                    WorkSheet1.Cells[1, 8].Value = "REPORTINGTO";
+                    WorkSheet1.Cells[1, 9].Value = "DEPARTMENT";
+                    WorkSheet1.Cells[1, 10].Value = "COMPANY";
+                    WorkSheet1.Cells[1, 11].Value = "DATEOFBIRTH";
+                    WorkSheet1.Cells[1, 12].Value = "DATE OF JOINING";
+                    WorkSheet1.Cells[1, 13].Value = "BLOOD GROUP";
+                    WorkSheet1.Cells[1, 14].Value = "GENDER";
+                    WorkSheet1.Cells[1, 15].Value = "MARITAL STATUS";
 
-                    WorkSheet1.Cells[1, 16].Value = "Emergency Name";
-                    WorkSheet1.Cells[1, 17].Value = "Emergency Contact Number";
-                    WorkSheet1.Cells[1, 18].Value = "Emergency Relation";
+                    WorkSheet1.Cells[1, 16].Value = "EMERGENCY NAME";
+                    WorkSheet1.Cells[1, 17].Value = "EMERGENCY CONTACT NUMBER";
+                    WorkSheet1.Cells[1, 18].Value = "EMERGENCY RELATION";
                     //WorkSheet1.Cells[1, 19].Value = "Past Company Name";
                     //WorkSheet1.Cells[1, 20].Value = "Total Exp";
                     //WorkSheet1.Cells[1, 21].Value = "Remark";
 
-                    WorkSheet1.Cells[1, 19].Value = "Address";
-                    WorkSheet1.Cells[1, 20].Value = "Country";
-                    WorkSheet1.Cells[1, 21].Value = "State";
-                    WorkSheet1.Cells[1, 22].Value = "Province";
-                    WorkSheet1.Cells[1, 23].Value = "Pincode";
+                    WorkSheet1.Cells[1, 19].Value = "ADDRESS";
+                    WorkSheet1.Cells[1, 20].Value = "COUNTRY";
+                    WorkSheet1.Cells[1, 21].Value = "STATE";
+                    WorkSheet1.Cells[1, 22].Value = "PROVINCE";
+                    WorkSheet1.Cells[1, 23].Value = "PINCODE";
 
-                    WorkSheet1.Cells[1, 24].Value = "IsSameAsPermanent";
-                    WorkSheet1.Cells[1, 25].Value = "Temporary_Address";
-                    WorkSheet1.Cells[1, 26].Value = "Temporary_Country";
-                    WorkSheet1.Cells[1, 27].Value = "Temporary_State";
-                    WorkSheet1.Cells[1, 28].Value = "Temporary_Province";
-                    WorkSheet1.Cells[1, 29].Value = "Temporary_Pincode";
+                    WorkSheet1.Cells[1, 24].Value = "ISSAMEASPERMANENT";
+                    WorkSheet1.Cells[1, 25].Value = "TEMPORARY_ADDRESS";
+                    WorkSheet1.Cells[1, 26].Value = "TEMPORARY_COUNTRY";
+                    WorkSheet1.Cells[1, 27].Value = "TEMPORARY_STATE";
+                    WorkSheet1.Cells[1, 28].Value = "TEMPORARY_PROVINCE";
+                    WorkSheet1.Cells[1, 29].Value = "TEMPORARY_PINCODE";
 
-                    WorkSheet1.Cells[1, 30].Value = "Aadhar Number";
-                    WorkSheet1.Cells[1, 31].Value = "Pan Number";
+                    WorkSheet1.Cells[1, 30].Value = "AADHAR NUMBER";
+                    WorkSheet1.Cells[1, 31].Value = "PAN NUMBER";
 
-                    WorkSheet1.Cells[1, 32].Value = "OtherProof";
-                    WorkSheet1.Cells[1, 33].Value = "IsDirector";
-                    //WorkSheet1.Cells[1, 34].Value = "IsManager";
-                    WorkSheet1.Cells[1, 34].Value = "IsApprover";
+                    WorkSheet1.Cells[1, 32].Value = "OTHERPROOF";
+                    WorkSheet1.Cells[1, 33].Value = "ISDIRECTOR";
+                    //WorkSheet1.Cells[1, 34].Value = "ISMANAGER";
+                    WorkSheet1.Cells[1, 34].Value = "ISAPPROVER";
 
-                    WorkSheet1.Cells[1, 35].Value = "IsMobileUser";
-                    WorkSheet1.Cells[1, 36].Value = "IsWebUser";
-                    WorkSheet1.Cells[1, 37].Value = "IsActive";
+                    WorkSheet1.Cells[1, 35].Value = "ISMOBILEUSER";
+                    WorkSheet1.Cells[1, 36].Value = "ISWEBUSER";
+                    WorkSheet1.Cells[1, 37].Value = "ISACTIVE";
 
                     recordIndex = 2;
 
@@ -975,55 +975,55 @@ namespace VMS.API.Controllers.Admin
                             strGateNumberList = string.Join(",", vSecurityGateDetail.ToList().OrderBy(x => x.GateDetailsId).Select(x => x.GateDetailsId));
                         }
 
-                        WorkSheet1.Cells[recordIndex, 1].Value = items.UserCode;
-                        WorkSheet1.Cells[recordIndex, 2].Value = items.UserName;
-                        WorkSheet1.Cells[recordIndex, 3].Value = items.UserType;
+                        WorkSheet1.Cells[recordIndex, 1].Value = items.UserCode.ToUpper();
+                        WorkSheet1.Cells[recordIndex, 2].Value = items.UserName == null ? "" : items.UserName.ToUpper();
+                        WorkSheet1.Cells[recordIndex, 3].Value = items.UserType == null ? "" : items.UserType.ToUpper();
                         WorkSheet1.Cells[recordIndex, 4].Value = items.MobileNumber;
-                        WorkSheet1.Cells[recordIndex, 5].Value = items.EmailId;
+                        WorkSheet1.Cells[recordIndex, 5].Value = items.EmailId == null ? "" : items.EmailId.ToUpper();
                         WorkSheet1.Cells[recordIndex, 6].Value = strGateNumberList;
-                        WorkSheet1.Cells[recordIndex, 7].Value = items.RoleName;
-                        WorkSheet1.Cells[recordIndex, 8].Value = items.ReportingToName;
-                        WorkSheet1.Cells[recordIndex, 9].Value = items.DepartmentName;
-                        WorkSheet1.Cells[recordIndex, 10].Value = items.CompanyName;
+                        WorkSheet1.Cells[recordIndex, 7].Value = items.RoleName == null ? "" : items.RoleName.ToUpper();
+                        WorkSheet1.Cells[recordIndex, 8].Value = items.ReportingToName == null ? "" : items.ReportingToName.ToUpper();
+                        WorkSheet1.Cells[recordIndex, 9].Value = items.DepartmentName == null ? "" : items.DepartmentName.ToUpper();
+                        WorkSheet1.Cells[recordIndex, 10].Value = items.CompanyName == null ? "" : items.CompanyName.ToUpper();
 
                         WorkSheet1.Cells[recordIndex, 11].Value = items.DateOfBirth.HasValue ? items.DateOfBirth.Value.ToString("dd/MM/yyyy") : string.Empty;
                         WorkSheet1.Cells[recordIndex, 12].Value = items.DateOfJoining.HasValue ? items.DateOfJoining.Value.ToString("dd/MM/yyyy") : string.Empty;
 
-                        WorkSheet1.Cells[recordIndex, 13].Value = items.BloodGroup;
+                        WorkSheet1.Cells[recordIndex, 13].Value = items.BloodGroup == null ? "" : items.BloodGroup.ToUpper();
 
-                        WorkSheet1.Cells[recordIndex, 14].Value = items.GenderName;
-                        WorkSheet1.Cells[recordIndex, 15].Value = vResultObj != null ? vResultObj.MaritalStatus : string.Empty;
-                        WorkSheet1.Cells[recordIndex, 16].Value = items.EmergencyName;
+                        WorkSheet1.Cells[recordIndex, 14].Value = items.GenderName == null ? "" : items.GenderName.ToUpper();
+                        WorkSheet1.Cells[recordIndex, 15].Value = vResultObj != null ? vResultObj.MaritalStatus == null ? "" : vResultObj.MaritalStatus.ToUpper().ToUpper() : string.Empty;
+                        WorkSheet1.Cells[recordIndex, 16].Value = items.EmergencyName == null ? "" : items.EmergencyName.ToUpper();
                         WorkSheet1.Cells[recordIndex, 17].Value = items.EmergencyContactNumber;
-                        WorkSheet1.Cells[recordIndex, 18].Value = items.EmergencyRelation;
+                        WorkSheet1.Cells[recordIndex, 18].Value = items.EmergencyRelation == null ? "" : items.EmergencyRelation.ToUpper();
                         //WorkSheet1.Cells[recordIndex, 16].Value = items.PastCompanyName;
                         //WorkSheet1.Cells[recordIndex, 16].Value = items.TotalExp;
                         //WorkSheet1.Cells[recordIndex, 16].Value = items.Remark;
 
-                        WorkSheet1.Cells[recordIndex, 19].Value = items.AddressLine;
-                        WorkSheet1.Cells[recordIndex, 20].Value = items.CountryName;
-                        WorkSheet1.Cells[recordIndex, 21].Value = items.StateName;
-                        WorkSheet1.Cells[recordIndex, 22].Value = items.DistrictName;
+                        WorkSheet1.Cells[recordIndex, 19].Value = items.AddressLine == null ? "" : items.AddressLine.ToUpper();
+                        WorkSheet1.Cells[recordIndex, 20].Value = items.CountryName == null ? "" : items.CountryName.ToUpper();
+                        WorkSheet1.Cells[recordIndex, 21].Value = items.StateName == null ? "" : items.StateName.ToUpper();
+                        WorkSheet1.Cells[recordIndex, 22].Value = items.DistrictName == null ? "" : items.DistrictName.ToUpper();
                         WorkSheet1.Cells[recordIndex, 23].Value = items.Pincode;
 
                         WorkSheet1.Cells[recordIndex, 24].Value = items.IsSameAsPermanent;
-                        WorkSheet1.Cells[recordIndex, 25].Value = items.TemporaryAddress;
-                        WorkSheet1.Cells[recordIndex, 26].Value = items.Temporary_CountryName;
-                        WorkSheet1.Cells[recordIndex, 27].Value = items.Temporary_StateName;
-                        WorkSheet1.Cells[recordIndex, 28].Value = items.Temporary_DistrictName;
+                        WorkSheet1.Cells[recordIndex, 25].Value = items.TemporaryAddress == null ? "" : items.TemporaryAddress.ToUpper();
+                        WorkSheet1.Cells[recordIndex, 26].Value = items.Temporary_CountryName == null ? "" : items.Temporary_CountryName.ToUpper();
+                        WorkSheet1.Cells[recordIndex, 27].Value = items.Temporary_StateName == null ? "" : items.Temporary_StateName.ToUpper();
+                        WorkSheet1.Cells[recordIndex, 28].Value = items.Temporary_DistrictName == null ? "" : items.Temporary_DistrictName.ToUpper();
                         WorkSheet1.Cells[recordIndex, 29].Value = items.Temporary_Pincode;
 
-                        WorkSheet1.Cells[recordIndex, 30].Value = items.AadharNumber;
-                        WorkSheet1.Cells[recordIndex, 31].Value = items.PanNumber;
+                        WorkSheet1.Cells[recordIndex, 30].Value = items.AadharNumber == null ? "" : items.AadharNumber.ToUpper();
+                        WorkSheet1.Cells[recordIndex, 31].Value = items.PanNumber == null ? "" : items.PanNumber.ToUpper();
 
-                        WorkSheet1.Cells[recordIndex, 32].Value = items.OtherProof;
+                        WorkSheet1.Cells[recordIndex, 32].Value = items.OtherProof == null ? "" : items.OtherProof.ToUpper();
                         WorkSheet1.Cells[recordIndex, 33].Value = items.IsHOD;
                         //WorkSheet1.Cells[recordIndex, 34].Value = items.IsManager;
                         WorkSheet1.Cells[recordIndex, 34].Value = items.IsApprover;
 
                         WorkSheet1.Cells[recordIndex, 35].Value = items.IsMobileUser;
                         WorkSheet1.Cells[recordIndex, 36].Value = items.IsWebUser;
-                        WorkSheet1.Cells[recordIndex, 37].Value = items.IsActive == true ? "Active" : "Inactive";
+                        WorkSheet1.Cells[recordIndex, 37].Value = items.IsActive == true ? "ACTIVE" : "INACTIVE";
 
                         recordIndex += 1;
                     }
@@ -1211,15 +1211,15 @@ namespace VMS.API.Controllers.Admin
                     WorkSheet1.Row(1).Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
                     WorkSheet1.Row(1).Style.Font.Bold = true;
 
-                    WorkSheet1.Cells[1, 1].Value = "Sr.No";
-                    WorkSheet1.Cells[1, 2].Value = "Employee Code";
-                    WorkSheet1.Cells[1, 3].Value = "Employee Name";
-                    WorkSheet1.Cells[1, 4].Value = "Branch";
-                    WorkSheet1.Cells[1, 5].Value = "Gate No";
-                    WorkSheet1.Cells[1, 6].Value = "Status";
-                    WorkSheet1.Cells[1, 7].Value = "Remark";
-                    WorkSheet1.Cells[1, 8].Value = "Created Date";
-                    WorkSheet1.Cells[1, 9].Value = "Created By";
+                    WorkSheet1.Cells[1, 1].Value = "SR.NO";
+                    WorkSheet1.Cells[1, 2].Value = "EMPLOYEE CODE";
+                    WorkSheet1.Cells[1, 3].Value = "EMPLOYEE NAME";
+                    WorkSheet1.Cells[1, 4].Value = "BRANCH";
+                    WorkSheet1.Cells[1, 5].Value = "GATE NO";
+                    WorkSheet1.Cells[1, 6].Value = "STATUS";
+                    WorkSheet1.Cells[1, 7].Value = "REMARK";
+                    WorkSheet1.Cells[1, 8].Value = "CREATED DATE";
+                    WorkSheet1.Cells[1, 9].Value = "CREATED BY";
 
                     recordIndex = 2;
 
@@ -1249,13 +1249,13 @@ namespace VMS.API.Controllers.Admin
                                     WorkSheet1.Cells[recordIndex, 1].Value = i + "." + j;
                                 }
                                 WorkSheet1.Cells[recordIndex, 2].Value = items.UserCode;
-                                WorkSheet1.Cells[recordIndex, 3].Value = items.UserName;
-                                WorkSheet1.Cells[recordIndex, 4].Value = items.BranchName;
+                                WorkSheet1.Cells[recordIndex, 3].Value = items.UserName == null ? "" : items.UserName.ToUpper();
+                                WorkSheet1.Cells[recordIndex, 4].Value = items.BranchName == null ? "" : items.BranchName.ToUpper();
                                 WorkSheet1.Cells[recordIndex, 5].Value = mitems.GateNumber;
-                                WorkSheet1.Cells[recordIndex, 6].Value = mitems.CheckedStatus;
-                                WorkSheet1.Cells[recordIndex, 7].Value = mitems.CheckedRemark;
+                                WorkSheet1.Cells[recordIndex, 6].Value = mitems.CheckedStatus == null ? "" : mitems.CheckedStatus.ToUpper();
+                                WorkSheet1.Cells[recordIndex, 7].Value = mitems.CheckedRemark == null ? "" : mitems.CheckedRemark.ToUpper();
                                 WorkSheet1.Cells[recordIndex, 8].Value = Convert.ToDateTime(mitems.CreatedDate).ToString("dd/MM/yyyy");
-                                WorkSheet1.Cells[recordIndex, 9].Value = mitems.CreatorName;
+                                WorkSheet1.Cells[recordIndex, 9].Value = mitems.CreatorName == null ? "" : mitems.CreatorName.ToUpper();
 
                                 recordIndex += 1;
 
@@ -1266,8 +1266,8 @@ namespace VMS.API.Controllers.Admin
                         {
                             WorkSheet1.Cells[recordIndex, 1].Value = i.ToString();
                             WorkSheet1.Cells[recordIndex, 2].Value = items.UserCode;
-                            WorkSheet1.Cells[recordIndex, 3].Value = items.UserName;
-                            WorkSheet1.Cells[recordIndex, 4].Value = items.BranchName;
+                            WorkSheet1.Cells[recordIndex, 3].Value = items.UserName == null ? "" : items.UserName.ToUpper();
+                            WorkSheet1.Cells[recordIndex, 4].Value = items.BranchName == null ? "" : items.BranchName.ToUpper();
 
                             recordIndex += 1;
                         }

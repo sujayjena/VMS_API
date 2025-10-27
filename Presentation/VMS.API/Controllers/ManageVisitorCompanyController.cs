@@ -313,32 +313,32 @@ namespace VMS.API.Controllers
                     WorkSheet1.Row(1).Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
                     WorkSheet1.Row(1).Style.Font.Bold = true;
 
-                    WorkSheet1.Cells[1, 1].Value = "Company Name";
-                    WorkSheet1.Cells[1, 2].Value = "Address";
-                    WorkSheet1.Cells[1, 3].Value = "Country";
-                    WorkSheet1.Cells[1, 4].Value = "State";
-                    WorkSheet1.Cells[1, 5].Value = "Province";
-                    WorkSheet1.Cells[1, 6].Value = "Pincode";
-                    WorkSheet1.Cells[1, 7].Value = "Company Phone";
+                    WorkSheet1.Cells[1, 1].Value = "COMPANY NAME";
+                    WorkSheet1.Cells[1, 2].Value = "ADDRESS";
+                    WorkSheet1.Cells[1, 3].Value = "COUNTRY";
+                    WorkSheet1.Cells[1, 4].Value = "STATE";
+                    WorkSheet1.Cells[1, 5].Value = "PROVINCE";
+                    WorkSheet1.Cells[1, 6].Value = "PINCODE";
+                    WorkSheet1.Cells[1, 7].Value = "COMPANY PHONE";
                     WorkSheet1.Cells[1, 8].Value = "GST";
-                    WorkSheet1.Cells[1, 9].Value = "CreatedDate";
-                    WorkSheet1.Cells[1, 10].Value = "CreatedBy";
+                    WorkSheet1.Cells[1, 9].Value = "CREATEDDATE";
+                    WorkSheet1.Cells[1, 10].Value = "CREATEDBY";
 
                     recordIndex = 2;
 
                     foreach (var items in lstData)
                     {
-                        WorkSheet1.Cells[recordIndex, 1].Value = items.CompanyName;
-                        WorkSheet1.Cells[recordIndex, 2].Value = items.CompanyAddress;
-                        WorkSheet1.Cells[recordIndex, 3].Value = items.CountryName;
-                        WorkSheet1.Cells[recordIndex, 4].Value = items.StateName;
-                        WorkSheet1.Cells[recordIndex, 5].Value = items.DistrictName;
+                        WorkSheet1.Cells[recordIndex, 1].Value = items.CompanyName == null ? "" : items.CompanyName.ToUpper();
+                        WorkSheet1.Cells[recordIndex, 2].Value = items.CompanyAddress == null ? "" : items.CompanyAddress.ToUpper();
+                        WorkSheet1.Cells[recordIndex, 3].Value = items.CountryName == null ? "" : items.CountryName.ToUpper();
+                        WorkSheet1.Cells[recordIndex, 4].Value = items.StateName == null ? "" : items.StateName.ToUpper();
+                        WorkSheet1.Cells[recordIndex, 5].Value = items.DistrictName == null ? "" : items.DistrictName.ToUpper();
                         WorkSheet1.Cells[recordIndex, 6].Value = items.Pincode;
                         WorkSheet1.Cells[recordIndex, 7].Value = items.CompanyPhone;
-                        WorkSheet1.Cells[recordIndex, 8].Value = items.GSTNo;
+                        WorkSheet1.Cells[recordIndex, 8].Value = items.GSTNo == null ? "" : items.GSTNo.ToUpper();
 
                         WorkSheet1.Cells[recordIndex, 9].Value = Convert.ToDateTime(items.CreatedDate).ToString("dd/MM/yyyy");
-                        WorkSheet1.Cells[recordIndex, 10].Value = items.CreatorName;
+                        WorkSheet1.Cells[recordIndex, 10].Value = items.CreatorName == null ? "" : items.CreatorName.ToUpper();
 
                         recordIndex += 1;
                     }

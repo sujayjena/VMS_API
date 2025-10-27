@@ -309,22 +309,22 @@ namespace VMS.API.Controllers.Admin
                     WorkSheet1.Row(1).Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
                     WorkSheet1.Row(1).Style.Font.Bold = true;
 
-                    WorkSheet1.Cells[1, 1].Value = "State";
-                    WorkSheet1.Cells[1, 2].Value = "Status";
+                    WorkSheet1.Cells[1, 1].Value = "STATE";
+                    WorkSheet1.Cells[1, 2].Value = "STATUS";
 
-                    WorkSheet1.Cells[1, 3].Value = "CreatedDate";
-                    WorkSheet1.Cells[1, 4].Value = "CreatedBy";
+                    WorkSheet1.Cells[1, 3].Value = "CREATEDDATE";
+                    WorkSheet1.Cells[1, 4].Value = "CREATEDBY";
 
                     recordIndex = 2;
 
                     foreach (var items in lstSizeObj)
                     {
-                        WorkSheet1.Cells[recordIndex, 1].Value = items.StateName;
-                        WorkSheet1.Cells[recordIndex, 2].Value = items.IsActive == true ? "Active" : "Inactive";
+                        WorkSheet1.Cells[recordIndex, 1].Value = items.StateName == null ? "" : items.StateName.ToUpper();
+                        WorkSheet1.Cells[recordIndex, 2].Value = items.IsActive == true ? "ACTIVE" : "INACTIVE";
 
                         //WorkSheet1.Cells[recordIndex, 5].Style.Numberformat.Format = DateTimeFormatInfo.CurrentInfo.ShortDatePattern;
                         WorkSheet1.Cells[recordIndex, 3].Value = items.CreatedDate.ToString("dd/MM/yyyy");
-                        WorkSheet1.Cells[recordIndex, 4].Value = items.CreatorName;
+                        WorkSheet1.Cells[recordIndex, 4].Value = items.CreatorName == null ? "" : items.CreatorName.ToUpper(); 
 
                         recordIndex += 1;
                     }
@@ -569,22 +569,22 @@ namespace VMS.API.Controllers.Admin
                     WorkSheet1.Row(1).Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
                     WorkSheet1.Row(1).Style.Font.Bold = true;
 
-                    WorkSheet1.Cells[1, 1].Value = "Province";
-                    WorkSheet1.Cells[1, 2].Value = "Status";
+                    WorkSheet1.Cells[1, 1].Value = "PROVINCE";
+                    WorkSheet1.Cells[1, 2].Value = "STATUS";
 
-                    WorkSheet1.Cells[1, 3].Value = "CreatedDate";
-                    WorkSheet1.Cells[1, 4].Value = "CreatedBy";
+                    WorkSheet1.Cells[1, 3].Value = "CREATEDDATE";
+                    WorkSheet1.Cells[1, 4].Value = "CREATEDBY";
 
                     recordIndex = 2;
 
                     foreach (var items in lstSizeObj)
                     {
-                        WorkSheet1.Cells[recordIndex, 1].Value = items.DistrictName;
-                        WorkSheet1.Cells[recordIndex, 2].Value = items.IsActive == true ? "Active" : "Inactive";
+                        WorkSheet1.Cells[recordIndex, 1].Value = items.DistrictName == null ? "" : items.DistrictName.ToUpper();
+                        WorkSheet1.Cells[recordIndex, 2].Value = items.IsActive == true ? "ACTIVE" : "INACTIVE";
 
                         //WorkSheet1.Cells[recordIndex, 5].Style.Numberformat.Format = DateTimeFormatInfo.CurrentInfo.ShortDatePattern;
                         WorkSheet1.Cells[recordIndex, 3].Value = items.CreatedDate.ToString("dd/MM/yyyy");
-                        WorkSheet1.Cells[recordIndex, 4].Value = items.CreatorName;
+                        WorkSheet1.Cells[recordIndex, 4].Value = items.CreatorName == null ? "" : items.CreatorName.ToUpper();
 
                         recordIndex += 1;
                     }
@@ -976,26 +976,26 @@ namespace VMS.API.Controllers.Admin
                     WorkSheet1.Row(1).Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
                     WorkSheet1.Row(1).Style.Font.Bold = true;
 
-                    WorkSheet1.Cells[1, 1].Value = "Country";
-                    WorkSheet1.Cells[1, 2].Value = "State";
-                    WorkSheet1.Cells[1, 3].Value = "Province";
-                    WorkSheet1.Cells[1, 4].Value = "Status";
+                    WorkSheet1.Cells[1, 1].Value = "COUNTRY";
+                    WorkSheet1.Cells[1, 2].Value = "STATE";
+                    WorkSheet1.Cells[1, 3].Value = "PROVINCE";
+                    WorkSheet1.Cells[1, 4].Value = "STATUS";
 
-                    WorkSheet1.Cells[1, 5].Value = "CreatedDate";
-                    WorkSheet1.Cells[1, 6].Value = "CreatedBy";
+                    WorkSheet1.Cells[1, 5].Value = "CREATEDDATE";
+                    WorkSheet1.Cells[1, 6].Value = "CREATEDBY";
 
                     recordIndex = 2;
 
                     foreach (var items in lstSizeObj)
                     {
-                        WorkSheet1.Cells[recordIndex, 1].Value = items.CountryName;
-                        WorkSheet1.Cells[recordIndex, 2].Value = items.StateName;
-                        WorkSheet1.Cells[recordIndex, 3].Value = items.DistrictName;
-                        WorkSheet1.Cells[recordIndex, 4].Value = items.IsActive == true ? "Active" : "Inactive";
+                        WorkSheet1.Cells[recordIndex, 1].Value = items.CountryName == null ? "" : items.CountryName.ToUpper();
+                        WorkSheet1.Cells[recordIndex, 2].Value = items.StateName == null ? "" : items.StateName.ToUpper();
+                        WorkSheet1.Cells[recordIndex, 3].Value = items.DistrictName == null ? "" : items.DistrictName.ToUpper();
+                        WorkSheet1.Cells[recordIndex, 4].Value = items.IsActive == true ? "ACTIVE" : "INACTIVE";
 
                         //WorkSheet1.Cells[recordIndex, 5].Style.Numberformat.Format = DateTimeFormatInfo.CurrentInfo.ShortDatePattern;
                         WorkSheet1.Cells[recordIndex, 5].Value = items.CreatedDate.ToString("dd/MM/yyyy");  
-                        WorkSheet1.Cells[recordIndex, 6].Value = items.CreatorName;
+                        WorkSheet1.Cells[recordIndex, 6].Value = items.CreatorName == null ? "" : items.CreatorName.ToUpper();
 
                         recordIndex += 1;
                     }

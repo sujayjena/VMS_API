@@ -140,9 +140,9 @@ namespace VMS.API.Controllers
                     WorkSheet1.Row(1).Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
                     WorkSheet1.Row(1).Style.Font.Bold = true;
 
-                    WorkSheet1.Cells[1, 1].Value = "No";
-                    WorkSheet1.Cells[1, 2].Value = "Time Ago";
-                    WorkSheet1.Cells[1, 3].Value = "Notification";
+                    WorkSheet1.Cells[1, 1].Value = "NO";
+                    WorkSheet1.Cells[1, 2].Value = "TIME AGO";
+                    WorkSheet1.Cells[1, 3].Value = "NOTIFICATION";
 
                     recordIndex = 2;
 
@@ -162,22 +162,22 @@ namespace VMS.API.Controllers
                             {
                                 if (vdiff.Hours == 0)
                                 {
-                                    vTimeAgo = vdiff.Days + " Day Ago";
+                                    vTimeAgo = vdiff.Days + " DAY AGO";
                                 }
                                 else
                                 {
-                                    vTimeAgo = vdiff.Days + " Day and " + vdiff.Hours + " Hr Ago";
+                                    vTimeAgo = vdiff.Days + " DAY AND " + vdiff.Hours + " HR AGO";
                                 }
                             }
                             else
                             {
                                 if (vdiff.Hours == 0)
                                 {
-                                    vTimeAgo = vdiff.Days + " Days Ago";
+                                    vTimeAgo = vdiff.Days + " DAYS AGO";
                                 }
                                 else
                                 {
-                                    vTimeAgo = vdiff.Days + " Days and " + vdiff.Hours + " Hr Ago";
+                                    vTimeAgo = vdiff.Days + " DAYS AND " + vdiff.Hours + " HR AGO";
                                 }
                             }
                         }
@@ -185,16 +185,16 @@ namespace VMS.API.Controllers
                         {
                             if (vdiff.Hours == 0)
                             {
-                                vTimeAgo = "Just Now";
+                                vTimeAgo = "JUST NOW";
                             }
                             else
                             {
-                                vTimeAgo = vdiff.Hours + " Hr Ago";
+                                vTimeAgo = vdiff.Hours + " HR AGO";
                             }
                         }
 
                         WorkSheet1.Cells[recordIndex, 2].Value = vTimeAgo;
-                        WorkSheet1.Cells[recordIndex, 3].Value = items.Message;
+                        WorkSheet1.Cells[recordIndex, 3].Value = items.Message.ToUpper();
 
                         rowNo++;
 
