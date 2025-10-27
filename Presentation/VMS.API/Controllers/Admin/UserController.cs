@@ -835,7 +835,7 @@ namespace VMS.API.Controllers.Admin
             }
 
             lstUser_ImportData.RemoveAll(x => lstUser_ImportDataValidation.Select(x => x.UserCode).Contains(x.UserCode));
-            /*
+
             foreach (var vItem in lstUser_ImportData)
             {
                 var vSearch = new User_Search()
@@ -844,21 +844,44 @@ namespace VMS.API.Controllers.Admin
                     BranchId = 0,
                     DepartmentId = 0,
                     UserTypeId = 0,
-                    IsFilterType = 0
+                    IsFilterType = 0,
+                    RoleId = 0,
+                    EmployeeId = 0,
                 };
 
                 var vUserList = await _userRepository.GetUserList(vSearch);
-
-                //Generate Password
-                var resultPass = await _userRepository.GetAutoGenPassword("");
-
-                //Send Email
-                if (!string.IsNullOrEmpty(vItem.EmailId) && vUserList.ToList().Count > 0)
+                if (vUserList.ToList().Count > 0)
                 {
-                    var vEmailEmp = await SendPassword_EmailToEmployee(resultPass, vUserList.ToList().FirstOrDefault().Id, "Login Credential");
+                    #region Generate Barcode
+                    var vGenerateBarcode = _barcodeRepository.GenerateBarcode(vUserList.ToList().FirstOrDefault().UserCode);
+                    if (vGenerateBarcode.Barcode_Unique_Id != "")
+                    {
+                        var vBarcode_Request = new Barcode_Request()
+                        {
+                            Id = 0,
+                            BarcodeNo = vUserList.ToList().FirstOrDefault().UserCode,
+                            BarcodeType = vUserList.ToList().FirstOrDefault().UserType,
+                            Barcode_Unique_Id = vGenerateBarcode.Barcode_Unique_Id,
+                            BarcodeOriginalFileName = vGenerateBarcode.BarcodeOriginalFileName,
+                            BarcodeFileName = vGenerateBarcode.BarcodeFileName,
+                            RefId = vUserList.ToList().FirstOrDefault().Id
+                        };
+                        var resultBarcode = _barcodeRepository.SaveBarcode(vBarcode_Request);
+                    }
+                    #endregion
+
+                    /*
+                    //Generate Password
+                    var resultPass = !string.IsNullOrWhiteSpace(vItem.Password) ? EncryptDecryptHelper.DecryptString(vItem.Password) : string.Empty;
+
+                    //Send Email
+                    if (!string.IsNullOrEmpty(vItem.EmailId))
+                    {
+                        var vEmailEmp = await SendPassword_EmailToEmployee(resultPass, vUserList.ToList().FirstOrDefault().Id, "Login Credential");
+                    }
+                    */
                 }
             }
-            */
 
             #endregion
 
