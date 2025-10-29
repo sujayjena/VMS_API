@@ -271,9 +271,8 @@ namespace VMS.API.Controllers
                                     {
                                         //Replace parameter 
                                         sSMSTemplateContent = sSMSTemplateContent.Replace("{#var#}", vVisitor.VisitorName.ToString());
-                                        sSMSTemplateContent = sSMSTemplateContent.Replace("{#var1#}", Convert.ToDateTime(vVisitor.VisitStartDate).ToString("dd/MM/yyyy"));
-                                        sSMSTemplateContent = sSMSTemplateContent.Replace("{#var2#}", Convert.ToDateTime(vVisitor.VisitStartDate).ToString("hh:mm:ss:tt"));
-                                        sSMSTemplateContent = sSMSTemplateContent.Replace("{#var3#}", vConfigRefObj.Ref_Value3 + "" + parameters.Id);
+                                        sSMSTemplateContent = sSMSTemplateContent.Replace("{#var1#}", Convert.ToDateTime(vVisitor.VisitStartDate).ToString("dd/MM/yyyy hh:mm:ss:tt"));
+                                        sSMSTemplateContent = sSMSTemplateContent.Replace("{#var2#}", vConfigRefObj.Ref_Value3 + "" + parameters.Id);
 
                                         //StringBuilder sb = new StringBuilder();
                                         //sb.AppendFormat(sSMSTemplateContent, iOTP.ToString(), parameters.VisitNumber);
@@ -539,9 +538,8 @@ namespace VMS.API.Controllers
                             {
                                 //Replace parameter 
                                 sSMSTemplateContent = sSMSTemplateContent.Replace("{#var#}", vVisitorResponse.VisitorName.ToString());
-                                sSMSTemplateContent = sSMSTemplateContent.Replace("{#var1#}", Convert.ToDateTime(vVisitorResponse.VisitStartDate).ToString("dd/MM/yyyy"));
-                                sSMSTemplateContent = sSMSTemplateContent.Replace("{#var2#}", Convert.ToDateTime(vVisitorResponse.VisitStartDate).ToString("hh:mm:ss:tt"));
-                                sSMSTemplateContent = sSMSTemplateContent.Replace("{#var3#}", vConfigRefObj.Ref_Value3 + "" + parameters.Id);
+                                sSMSTemplateContent = sSMSTemplateContent.Replace("{#var1#}", Convert.ToDateTime(vVisitorResponse.VisitStartDate).ToString("dd/MM/yyyy hh:mm:ss:tt"));
+                                sSMSTemplateContent = sSMSTemplateContent.Replace("{#var2#}", vConfigRefObj.Ref_Value3 + "" + parameters.Id);
 
                                 //StringBuilder sb = new StringBuilder();
                                 //sb.AppendFormat(sSMSTemplateContent, iOTP.ToString(), parameters.VisitNumber);
