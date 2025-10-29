@@ -29,7 +29,7 @@ namespace VMS.Persistence.Repositories
             queryParameters.Add("@WorkerTypeId", parameters.WorkerTypeId);
             queryParameters.Add("@ContractTypeId", parameters.ContractTypeId);
             queryParameters.Add("@WorkerMobileNo", parameters.WorkerMobileNo);
-            queryParameters.Add("@DocumentTypeId", parameters.DocumentTypeId);
+            queryParameters.Add("@IDTypeId", parameters.IDTypeId);
             queryParameters.Add("@DocumentNumber", parameters.DocumentNumber);
             queryParameters.Add("@ValidFromDate", parameters.ValidFromDate);
             queryParameters.Add("@ValidToDate", parameters.ValidToDate);

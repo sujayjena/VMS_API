@@ -25,7 +25,7 @@ namespace VMS.Application.Models
         public int? WorkerTypeId { get; set; }
         public int? ContractTypeId { get; set; }
         public string? WorkerMobileNo { get; set; }
-        public int? DocumentTypeId { get; set; }
+        public int? IDTypeId { get; set; }
         public string? DocumentNumber { get; set; }
         public DateTime? ValidFromDate { get; set; }
         public DateTime? ValidToDate { get; set; }
@@ -78,8 +78,8 @@ namespace VMS.Application.Models
         public int? ContractTypeId { get; set; }
         public string? ContractType { get; set; }
         public string? WorkerMobileNo { get; set; }
-        public int? DocumentTypeId { get; set; }
-        public string? DocumentType { get; set; }
+        public int? IDTypeId { get; set; }
+        public string? IDType { get; set; }
         public string? DocumentNumber { get; set; }
         public DateTime? ValidFromDate { get; set; }
         public DateTime? ValidToDate { get; set; }
