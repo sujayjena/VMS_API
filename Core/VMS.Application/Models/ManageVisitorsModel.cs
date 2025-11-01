@@ -33,6 +33,9 @@ namespace VMS.Application.Models
         public int? BranchId { get; set; }
         public int? DepartmentId { get; set; }
         public bool? IsPlanned { get; set; }
+
+        [DefaultValue("Visitor")]
+        public string? FilterType { get; set; }
     }
 
     public class Visitors_Request : BaseEntity
