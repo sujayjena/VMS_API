@@ -150,8 +150,8 @@ namespace VMS.API.Controllers
                     return _response;
                 }
 
-                if (Convert.ToDateTime(DateTime.Now) < Convert.ToDateTime("2025-11-07"))
-                {
+                //if (Convert.ToDateTime(DateTime.Now) < Convert.ToDateTime("2025-11-20"))
+                //{
                     if (loginResponse.IsActive == true && (loginResponse.IsWebUser == true && parameters.IsWebOrMobileUser == "W" || loginResponse.IsMobileUser == true && parameters.IsWebOrMobileUser == "M"))
                     {
                         tokenResponse = _jwt.GenerateJwtToken(loginResponse);
@@ -259,12 +259,12 @@ namespace VMS.API.Controllers
                         _response.IsSuccess = false;
                         _response.Message = ErrorConstants.InactiveProfileError;
                     }
-                }
-                else
-                {
-                    _response.IsSuccess = false;
-                    _response.Message = "Invalid credential, please try again with correct credential";
-                }
+                //}
+                //else
+                //{
+                //    _response.IsSuccess = false;
+                //    _response.Message = "timeout exception error code 408.";
+                //}
             }
             else
             {
