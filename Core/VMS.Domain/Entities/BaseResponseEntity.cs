@@ -10,6 +10,6 @@ namespace VMS.Domain.Entities
 
         public string ModifierName { get; set; }
         public long ModifiedBy { get; set; }
-        public DateTime ModifiedDate { get; set; }
+        public DateTime? ModifiedDate { get; set; }
     }
 }

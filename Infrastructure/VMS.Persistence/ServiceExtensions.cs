@@ -48,6 +48,7 @@ namespace VMS.Persistence
             services.AddScoped<INotificationRepository, NotificationRepository>();
             services.AddScoped<IDashboardRepository, DashboardRepository>();
             services.AddScoped<IManageVisitorCompanyRepository, ManageVisitorCompanyRepository>();
+            services.AddScoped<IManageSupplierRepository, ManageSupplierRepository>();
         }
     }
 }
