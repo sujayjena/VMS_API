@@ -568,4 +568,54 @@ namespace VMS.Application.Models
         public bool? IsActive { get; set; }
     }
     #endregion
+
+    #region Item Group
+    public class ItemGroup_Request : BaseEntity
+    {
+        [DefaultValue("")]
+        public string? ItemGroupName { get; set; }
+
+        public bool? IsActive { get; set; }
+    }
+
+    public class ItemGroup_Response : BaseResponseEntity
+    {
+        public string? ItemGroupName { get; set; }
+
+        public bool? IsActive { get; set; }
+    }
+    #endregion
+
+    #region Item
+    public class Item_Request : BaseEntity
+    {
+        [DefaultValue("")]
+        public string? ItemName { get; set; }
+
+        public bool? IsActive { get; set; }
+    }
+
+    public class Item_Response : BaseResponseEntity
+    {
+        public string? ItemName { get; set; }
+
+        public bool? IsActive { get; set; }
+    }
+    #endregion
+
+    #region Material Type
+    public class MaterialType_Request : BaseEntity
+    {
+
+        [DefaultValue("")]
+        public string? MaterialType { get; set; }
+        public bool? IsActive { get; set; }
+    }
+
+    public class MaterialType_Response : BaseResponseEntity
+    {
+        public string? MaterialType { get; set; }
+        public bool? IsActive { get; set; }
+    }
+    #endregion
 }

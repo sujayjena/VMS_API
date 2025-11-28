@@ -224,5 +224,32 @@ namespace VMS.Application.Interfaces
         Task<BuildingRoomNumber_Response?> GetBuildingRoomNumberById(int Id);
 
         #endregion
+
+        #region Item Group
+        Task<int> SaveItemGroup(ItemGroup_Request parameters);
+
+        Task<IEnumerable<ItemGroup_Response>> GetItemGroupList(BaseSearchEntity parameters);
+
+        Task<ItemGroup_Response?> GetItemGroupById(int Id);
+
+        #endregion
+
+        #region Item
+        Task<int> SaveItem(Item_Request parameters);
+
+        Task<IEnumerable<Item_Response>> GetItemList(BaseSearchEntity parameters);
+
+        Task<Item_Response?> GetItemById(int Id);
+
+        #endregion
+
+        #region Material Type
+        Task<int> SaveMaterialType(MaterialType_Request parameters);
+
+        Task<IEnumerable<MaterialType_Response>> GetMaterialTypeList(BaseSearchEntity parameters);
+
+        Task<MaterialType_Response?> GetMaterialTypeById(int Id);
+
+        #endregion
     }
 }
