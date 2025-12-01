@@ -971,6 +971,7 @@ namespace VMS.Persistence.Repositories
         {
             DynamicParameters queryParameters = new DynamicParameters();
             queryParameters.Add("@Id", parameters.Id);
+            queryParameters.Add("@GateDetailsId", parameters.GateDetailsId);
             queryParameters.Add("@BuildingName", parameters.BuildingName);
             queryParameters.Add("@NoofRooms", parameters.NoofRooms);
             queryParameters.Add("@IsActive", parameters.IsActive);

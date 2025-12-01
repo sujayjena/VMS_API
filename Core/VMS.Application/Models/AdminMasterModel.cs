@@ -528,6 +528,8 @@ namespace VMS.Application.Models
     #region Building Name
     public class BuildingName_Request : BaseEntity
     {
+        public int? GateDetailsId { get; set; }
+
         [DefaultValue("")]
         public string? BuildingName { get; set; }
         public int? NoofRooms { get; set; }
@@ -536,6 +538,8 @@ namespace VMS.Application.Models
 
     public class BuildingName_Response : BaseResponseEntity
     {
+        public int? GateDetailsId { get; set; }
+        public string? GateNumber { get; set; }
         public string? BuildingName { get; set; }
         public int? NoofRooms { get; set; }
         public bool? IsActive { get; set; }
