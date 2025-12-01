@@ -401,5 +401,111 @@ namespace VMS.API.Controllers
 
             return _response;
         }
+
+        [Route("[action]")]
+        [HttpPost]
+        public async Task<ResponseModel> ExportWorkerData(WorkerSearch_Request parameters)
+        {
+            _response.IsSuccess = false;
+            byte[] result;
+            int recordIndex;
+            ExcelWorksheet WorkSheet1;
+            ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
+
+            IEnumerable<Worker_Response> lstData = await _manageWorkerRepository.GetWorkerList(parameters);
+
+            using (MemoryStream msExportDataFile = new MemoryStream())
+            {
+                using (ExcelPackage excelExportData = new ExcelPackage())
+                {
+                    WorkSheet1 = excelExportData.Workbook.Worksheets.Add("Worker");
+                    WorkSheet1.TabColor = System.Drawing.Color.Black;
+                    WorkSheet1.DefaultRowHeight = 12;
+
+                    //Header of table
+                    WorkSheet1.Row(1).Height = 20;
+                    WorkSheet1.Row(1).Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+                    WorkSheet1.Row(1).Style.Font.Bold = true;
+
+                    WorkSheet1.Cells[1, 1].Value = "WorkerName";
+                    WorkSheet1.Cells[1, 2].Value = "Worker Pass ID";
+                    WorkSheet1.Cells[1, 3].Value = "Worker Type";
+                    WorkSheet1.Cells[1, 4].Value = "Mobile Number";
+                    WorkSheet1.Cells[1, 5].Value = "Valid From";
+                    WorkSheet1.Cells[1, 6].Value = "Valid To";
+                    WorkSheet1.Cells[1, 7].Value = "Date of Birth";
+                    WorkSheet1.Cells[1, 8].Value = "Blood Group";
+                    WorkSheet1.Cells[1, 9].Value = "Identification Mark";
+                    WorkSheet1.Cells[1, 10].Value = "Branch";
+                    WorkSheet1.Cells[1, 11].Value = "WorkPlace";
+                    WorkSheet1.Cells[1, 12].Value = "Gate Number";
+                    WorkSheet1.Cells[1, 13].Value = "Address";
+                    WorkSheet1.Cells[1, 14].Value = "Country";
+                    WorkSheet1.Cells[1, 15].Value = "State";
+                    WorkSheet1.Cells[1, 16].Value = "Province";
+                    WorkSheet1.Cells[1, 17].Value = "Pincode";
+                    WorkSheet1.Cells[1, 18].Value = "Document Type";
+                    WorkSheet1.Cells[1, 19].Value = "Document Number";
+                    WorkSheet1.Cells[1, 20].Value = "Blacklisted?";
+                    WorkSheet1.Cells[1, 21].Value = "Status";
+                    WorkSheet1.Cells[1, 22].Value = "CreatedDate";
+                    WorkSheet1.Cells[1, 23].Value = "CreatedBy";
+
+                    recordIndex = 2;
+
+                    foreach (var items in lstData)
+                    {
+                        string strGateNumberList = string.Empty;
+
+                        var vSecurityGateDetail = await _assignGateNoRepository.GetAssignGateNoById(RefId: Convert.ToInt32(items.Id), "Worker", GateDetailsId: 0);
+                        if (vSecurityGateDetail.ToList().Count > 0)
+                        {
+                            strGateNumberList = string.Join(",", vSecurityGateDetail.ToList().Select(x => x.GateNumber));
+                        }
+
+                        WorkSheet1.Cells[recordIndex, 1].Value = items.WorkerName;
+                        WorkSheet1.Cells[recordIndex, 2].Value = items.WorkerId;
+                        WorkSheet1.Cells[recordIndex, 3].Value = items.WorkerType;
+                        WorkSheet1.Cells[recordIndex, 4].Value = items.WorkerMobileNo;
+                        WorkSheet1.Cells[recordIndex, 5].Value = items.ValidFromDate.HasValue ? items.ValidFromDate.Value.ToString("dd/MM/yyyy") : string.Empty;
+                        WorkSheet1.Cells[recordIndex, 6].Value = items.ValidToDate.HasValue ? items.ValidToDate.Value.ToString("dd/MM/yyyy") : string.Empty;
+                        WorkSheet1.Cells[recordIndex, 7].Value = items.DOB.HasValue ? items.DOB.Value.ToString("dd/MM/yyyy") : string.Empty;
+                        WorkSheet1.Cells[recordIndex, 8].Value = items.BloodGroup;
+                        WorkSheet1.Cells[recordIndex, 9].Value = items.IdentificationMark;
+                        WorkSheet1.Cells[recordIndex, 10].Value = items.BranchName;
+                        WorkSheet1.Cells[recordIndex, 11].Value = items.WorkPlace;
+                        WorkSheet1.Cells[recordIndex, 12].Value = strGateNumberList;
+                        WorkSheet1.Cells[recordIndex, 13].Value = items.Address;
+                        WorkSheet1.Cells[recordIndex, 14].Value = items.CountryName;
+                        WorkSheet1.Cells[recordIndex, 15].Value = items.StateName;
+                        WorkSheet1.Cells[recordIndex, 16].Value = items.DistrictName;
+                        WorkSheet1.Cells[recordIndex, 17].Value = items.Pincode;
+                        WorkSheet1.Cells[recordIndex, 18].Value = items.IDType;
+                        WorkSheet1.Cells[recordIndex, 19].Value = items.DocumentNumber;
+                        WorkSheet1.Cells[recordIndex, 20].Value = items.IsBlackList == true ? "Yes" : "No";
+                        WorkSheet1.Cells[recordIndex, 21].Value = items.IsActive == true ? "Active" : "Inactive";
+                        WorkSheet1.Cells[recordIndex, 22].Value = Convert.ToDateTime(items.CreatedDate).ToString("dd/MM/yyyy");
+                        WorkSheet1.Cells[recordIndex, 23].Value = items.CreatorName;
+
+                        recordIndex += 1;
+                    }
+
+                    WorkSheet1.Columns.AutoFit();
+
+                    excelExportData.SaveAs(msExportDataFile);
+                    msExportDataFile.Position = 0;
+                    result = msExportDataFile.ToArray();
+                }
+            }
+
+            if (result != null)
+            {
+                _response.Data = result;
+                _response.IsSuccess = true;
+                _response.Message = "Exported successfully";
+            }
+
+            return _response;
+        }
     }
 }
