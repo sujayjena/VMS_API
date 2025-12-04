@@ -9,6 +9,12 @@ namespace VMS.Application.Interfaces
 {
     public interface IManageStayRepository
     {
+        #region Employee Stay
+        Task<int> SaveEmployeeStay(EmployeeStay_Request parameters);
+        Task<IEnumerable<EmployeeStay_Response>> GetEmployeeStayList(EmployeeStay_Search parameters);
+        Task<EmployeeStay_Response?> GetEmployeeStayById(int Id);
+        #endregion
+
         #region Worker Stay
         Task<int> SaveWorkerStay(WorkerStay_Request parameters);
         Task<IEnumerable<WorkerStay_Response>> GetWorkerStayList(WorkerStay_Search parameters);

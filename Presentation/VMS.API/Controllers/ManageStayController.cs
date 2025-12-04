@@ -24,7 +24,69 @@ namespace VMS.API.Controllers
             _response.IsSuccess = true;
         }
 
+        #region Employee Stay
+        [Route("[action]")]
+        [HttpPost]
+        public async Task<ResponseModel> SaveEmployeeStay(EmployeeStay_Request parameters)
+        {
+            int result = await _manageStayRepository.SaveEmployeeStay(parameters);
 
+            if (result == (int)SaveOperationEnums.NoRecordExists)
+            {
+                _response.Message = "No record exists";
+            }
+            else if (result == (int)SaveOperationEnums.ReocrdExists)
+            {
+                _response.Message = "Record is already exists";
+            }
+            else if (result == (int)SaveOperationEnums.NoResult)
+            {
+                _response.Message = "Something went wrong, please try again";
+            }
+            else
+            {
+                if (parameters.Id > 0)
+                {
+                    _response.Message = "Record updated successfully";
+                }
+                else
+                {
+                    _response.Message = "Record details saved successfully";
+                }
+            }
+            return _response;
+        }
+
+        [Route("[action]")]
+        [HttpPost]
+        public async Task<ResponseModel> GetEmployeeStayList(EmployeeStay_Search parameters)
+        {
+            IEnumerable<EmployeeStay_Response> lstRoles = await _manageStayRepository.GetEmployeeStayList(parameters);
+
+            _response.Data = lstRoles.ToList();
+            _response.Total = parameters.Total;
+            return _response;
+        }
+
+        [Route("[action]")]
+        [HttpPost]
+        public async Task<ResponseModel> GetEmployeeStayById(int Id)
+        {
+            if (Id <= 0)
+            {
+                _response.Message = "Id is required";
+            }
+            else
+            {
+                var vResultObj = await _manageStayRepository.GetEmployeeStayById(Id);
+
+                _response.Data = vResultObj;
+            }
+            return _response;
+        }
+        #endregion
+
+        #region Worker Stay
         [Route("[action]")]
         [HttpPost]
         public async Task<ResponseModel> SaveWorkerStay(WorkerStay_Request parameters)
@@ -84,5 +146,6 @@ namespace VMS.API.Controllers
             }
             return _response;
         }
+        #endregion
     }
 }
