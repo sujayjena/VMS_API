@@ -219,7 +219,7 @@ namespace VMS.Application.Interfaces
         #region Building Room Number
         Task<int> SaveBuildingRoomNumber(BuildingRoomNumber_Request parameters);
 
-        Task<IEnumerable<BuildingRoomNumber_Response>> GetBuildingRoomNumberList(BaseSearchEntity parameters);
+        Task<IEnumerable<BuildingRoomNumber_Response>> GetBuildingRoomNumberList(BuildingRoomNumber_Search parameters);
 
         Task<BuildingRoomNumber_Response?> GetBuildingRoomNumberById(int Id);
 

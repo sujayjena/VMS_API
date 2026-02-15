@@ -1636,7 +1636,7 @@ namespace VMS.API.Controllers.Admin
 
         [Route("[action]")]
         [HttpPost]
-        public async Task<ResponseModel> GetBuildingRoomNumberList(BaseSearchEntity parameters)
+        public async Task<ResponseModel> GetBuildingRoomNumberList(BuildingRoomNumber_Search parameters)
         {
             IEnumerable<BuildingRoomNumber_Response> lstRoles = await _adminMasterRepository.GetBuildingRoomNumberList(parameters);
             _response.Data = lstRoles.ToList();

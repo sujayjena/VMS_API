@@ -80,4 +80,19 @@ namespace VMS.Application.Models
         public bool? IsActive { get; set; }
     }
     #endregion
+
+    public class MemberAssignRoom_Search : BaseSearchEntity
+    {
+        public int? BuildingRoomNumberId { get; set; }
+    }
+    public class MemberAssignRoom_Response : BaseResponseEntity
+    {
+        public int? RefId { get; set; }
+        public string? RefName { get; set; }
+        public int? UserTypeId { get; set; }
+        public string? UserType { get; set; }
+        public string? MobileNumber { get; set; }
+        public int? BuildingRoomNumberId { get; set; }
+        public int? RoomNumber { get; set; }
+    }
 }

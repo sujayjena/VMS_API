@@ -20,5 +20,7 @@ namespace VMS.Application.Interfaces
         Task<IEnumerable<WorkerStay_Response>> GetWorkerStayList(WorkerStay_Search parameters);
         Task<WorkerStay_Response?> GetWorkerStayById(int Id);
         #endregion
+
+        Task<IEnumerable<MemberAssignRoom_Response>> GetMemberAssignRoomList(MemberAssignRoom_Search parameters);
     }
 }

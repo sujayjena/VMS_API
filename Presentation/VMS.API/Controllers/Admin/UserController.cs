@@ -972,7 +972,7 @@ namespace VMS.API.Controllers.Admin
                         var vSecurityGateDetail = await _assignGateNoRepository.GetAssignGateNoById(RefId: Convert.ToInt32(items.Id), vResultObj.UserTypeId == 1 ? "Employee" : "Security", GateDetailsId: 0);
                         if (vSecurityGateDetail.ToList().Count > 0)
                         {
-                            strGateNumberList = string.Join(",", vSecurityGateDetail.ToList().OrderBy(x => x.GateDetailsId).Select(x => x.GateDetailsId));
+                            strGateNumberList = string.Join(",", vSecurityGateDetail.ToList().OrderBy(x => x.GateDetailsId).Select(x => x.GateNumber));
                         }
 
                         WorkSheet1.Cells[recordIndex, 1].Value = items.UserCode.ToUpper();

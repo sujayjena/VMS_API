@@ -816,12 +816,14 @@ namespace VMS.Persistence.Repositories
         {
             DynamicParameters queryParameters = new DynamicParameters();
             queryParameters.Add("@Id", parameters.Id);
+            queryParameters.Add("@MaterialTypeId", parameters.MaterialTypeId);
             queryParameters.Add("@MaterialCode", parameters.MaterialCode.SanitizeValue());
             queryParameters.Add("@MaterialName", parameters.MaterialName.SanitizeValue());
             queryParameters.Add("@CurrentStock", parameters.CurrentStock);
             queryParameters.Add("@Quantity", parameters.Quantity);
             queryParameters.Add("@UOMId", parameters.UOMId);
             queryParameters.Add("@Remarks", parameters.Remarks);
+            queryParameters.Add("@MinStock", parameters.MinStock);
             queryParameters.Add("@IsActive", parameters.IsActive);
             queryParameters.Add("@UserId", SessionManager.LoggedInUserId);
 
@@ -1021,9 +1023,10 @@ namespace VMS.Persistence.Repositories
             return await SaveByStoredProcedure<int>("SaveBuildingRoomNumber", queryParameters);
         }
 
-        public async Task<IEnumerable<BuildingRoomNumber_Response>> GetBuildingRoomNumberList(BaseSearchEntity parameters)
+        public async Task<IEnumerable<BuildingRoomNumber_Response>> GetBuildingRoomNumberList(BuildingRoomNumber_Search parameters)
         {
             DynamicParameters queryParameters = new DynamicParameters();
+            queryParameters.Add("@BuildingNameId", parameters.BuildingNameId);
             queryParameters.Add("@SearchText", parameters.SearchText.SanitizeValue());
             queryParameters.Add("@IsActive", parameters.IsActive);
             queryParameters.Add("@PageNo", parameters.PageNo);

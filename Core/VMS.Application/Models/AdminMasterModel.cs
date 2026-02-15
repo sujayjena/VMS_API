@@ -442,6 +442,8 @@ namespace VMS.Application.Models
 
     public class MaterialDetails_Request : BaseEntity
     {
+        public int? MaterialTypeId { get; set; }
+
         [DefaultValue("")]
         public string? MaterialCode { get; set; }
 
@@ -451,11 +453,14 @@ namespace VMS.Application.Models
         public decimal? Quantity { get; set; }
         public int? UOMId { get; set; }
         public string? Remarks { get; set; }
+        public decimal? MinStock { get; set; }
         public bool? IsActive { get; set; }
     }
 
     public class MaterialDetails_Response : BaseResponseEntity
     {
+        public int? MaterialTypeId { get; set; }
+        public string? MaterialType { get; set; }
         public string? MaterialCode { get; set; }
         public string? MaterialName { get; set; }
         public decimal? CurrentStock { get; set; }
@@ -463,6 +468,7 @@ namespace VMS.Application.Models
         public int? UOMId { get; set; }
         public string? UOMName { get; set; }
         public string? Remarks { get; set; }
+        public decimal? MinStock { get; set; }
         public bool? IsActive { get; set; }
     }
 
@@ -547,6 +553,10 @@ namespace VMS.Application.Models
     #endregion
 
     #region Building Room Number
+    public class BuildingRoomNumber_Search : BaseSearchEntity
+    {
+        public int? BuildingNameId { get; set; }
+    }
     public class BuildingRoomNumber_Request : BaseEntity
     {
         public int? BuildingNameId { get; set; }

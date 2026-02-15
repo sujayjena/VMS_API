@@ -84,6 +84,17 @@ namespace VMS.API.Controllers
             }
             return _response;
         }
+
+        [Route("[action]")]
+        [HttpPost]
+        public async Task<ResponseModel> GetMemberAssignRoomList(MemberAssignRoom_Search parameters)
+        {
+            IEnumerable<MemberAssignRoom_Response> lstRoles = await _manageStayRepository.GetMemberAssignRoomList(parameters);
+
+            _response.Data = lstRoles.ToList();
+            _response.Total = parameters.Total;
+            return _response;
+        }
         #endregion
 
         #region Worker Stay

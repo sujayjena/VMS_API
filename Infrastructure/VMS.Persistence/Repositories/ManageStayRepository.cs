@@ -97,5 +97,22 @@ namespace VMS.Persistence.Repositories
             return (await ListByStoredProcedure<WorkerStay_Response>("GetWorkerStayById", queryParameters)).FirstOrDefault();
         }
         #endregion
+
+        public async Task<IEnumerable<MemberAssignRoom_Response>> GetMemberAssignRoomList(MemberAssignRoom_Search parameters)
+        {
+            DynamicParameters queryParameters = new DynamicParameters();
+            queryParameters.Add("@BuildingRoomNumberId", parameters.BuildingRoomNumberId);
+            queryParameters.Add("@SearchText", parameters.SearchText.SanitizeValue());
+            queryParameters.Add("@IsActive", parameters.IsActive);
+            queryParameters.Add("@PageNo", parameters.PageNo);
+            queryParameters.Add("@PageSize", parameters.PageSize);
+            queryParameters.Add("@Total", parameters.Total, null, System.Data.ParameterDirection.Output);
+            queryParameters.Add("@UserId", SessionManager.LoggedInUserId);
+
+            var result = await ListByStoredProcedure<MemberAssignRoom_Response>("GetMemberAssignRoomList", queryParameters);
+            parameters.Total = queryParameters.Get<int>("Total");
+
+            return result;
+        }
     }
 }
