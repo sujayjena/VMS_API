@@ -10,7 +10,7 @@ namespace VMS.Application.Interfaces
     public interface IManageTransporterRepository
     {
         Task<int> SaveTransporter(Transporter_Request parameters);
-        Task<IEnumerable<Transporter_Response>> GetTransporterList(Transporter_Search parameters);
+        Task<IEnumerable<TransporterList_Response>> GetTransporterList(Transporter_Search parameters);
         Task<Transporter_Response?> GetTransporterById(int Id);
     }
 }

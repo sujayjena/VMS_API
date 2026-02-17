@@ -52,7 +52,7 @@ namespace VMS.Persistence.Repositories
             return await SaveByStoredProcedure<int>("SaveTransporter", queryParameters);
         }
 
-        public async Task<IEnumerable<Transporter_Response>> GetTransporterList(Transporter_Search parameters)
+        public async Task<IEnumerable<TransporterList_Response>> GetTransporterList(Transporter_Search parameters)
         {
             DynamicParameters queryParameters = new DynamicParameters();
             queryParameters.Add("@SearchText", parameters.SearchText.SanitizeValue());
@@ -62,7 +62,7 @@ namespace VMS.Persistence.Repositories
             queryParameters.Add("@Total", parameters.Total, null, System.Data.ParameterDirection.Output);
             queryParameters.Add("@UserId", SessionManager.LoggedInUserId);
 
-            var result = await ListByStoredProcedure<Transporter_Response>("GetTransporterList", queryParameters);
+            var result = await ListByStoredProcedure<TransporterList_Response>("GetTransporterList", queryParameters);
             parameters.Total = queryParameters.Get<int>("Total");
 
             return result;

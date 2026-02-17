@@ -4,6 +4,7 @@ using VMS.Application.Enums;
 using VMS.Application.Helpers;
 using VMS.Application.Interfaces;
 using VMS.Application.Models;
+using VMS.Persistence.Repositories;
 
 namespace VMS.API.Controllers
 {
@@ -13,11 +14,15 @@ namespace VMS.API.Controllers
     {
         private ResponseModel _response;
         private readonly IManageTransporterRepository _manageTransporterRepository;
+        private readonly IContactDetailRepository _contactDetailRepository;
+        private readonly IAddressRepository _addressRepository;
         private IFileManager _fileManager;
 
-        public ManageTransporterController(IManageTransporterRepository manageTransporterRepository, IFileManager fileManager)
+        public ManageTransporterController(IManageTransporterRepository manageTransporterRepository,IContactDetailRepository contactDetailRepository, IAddressRepository addressRepository, IFileManager fileManager)
         {
             _manageTransporterRepository = manageTransporterRepository;
+            _contactDetailRepository = contactDetailRepository;
+            _addressRepository = addressRepository;
             _fileManager = fileManager;
 
             _response = new ResponseModel();
@@ -76,6 +81,37 @@ namespace VMS.API.Controllers
                 {
                     _response.Message = "Record details saved successfully";
                 }
+
+                #region Contact Details
+                foreach (var items in parameters.ContactDetail)
+                {
+                    items.RefId = result;
+                    items.RefType = "Transporter";
+
+                    // Image Upload
+                    if (parameters != null && !string.IsNullOrWhiteSpace(items.AadharCardImage_Base64))
+                    {
+                        var vUploadFile_AadharCardImage = _fileManager.UploadDocumentsBase64ToFile(items.AadharCardImage_Base64, "\\Uploads\\Transporter\\", items.AadharCardOriginalFileName);
+
+                        if (!string.IsNullOrWhiteSpace(vUploadFile_AadharCardImage))
+                        {
+                            items.AadharCardImageFileName = vUploadFile_AadharCardImage;
+                        }
+                    }
+
+                    int resultContact = await _contactDetailRepository.SaveContactDetail(items);
+                }
+                #endregion
+
+                #region Address Details
+                foreach (var items in parameters.AddressDetail)
+                {
+                    items.RefId = result;
+                    items.RefType = "Transporter";
+
+                    int resultAddress = await _addressRepository.SaveAddress(items);
+                }
+                #endregion
             }
             return _response;
         }
@@ -84,7 +120,7 @@ namespace VMS.API.Controllers
         [HttpPost]
         public async Task<ResponseModel> GetTransporterList(Transporter_Search parameters)
         {
-            IEnumerable<Transporter_Response> lstRoles = await _manageTransporterRepository.GetTransporterList(parameters);
+            IEnumerable<TransporterList_Response> lstRoles = await _manageTransporterRepository.GetTransporterList(parameters);
 
             _response.Data = lstRoles.ToList();
             _response.Total = parameters.Total;
@@ -102,6 +138,28 @@ namespace VMS.API.Controllers
             else
             {
                 var vResultObj = await _manageTransporterRepository.GetTransporterById(Id);
+                if (vResultObj != null)
+                {
+                    var vContactDetail_Search = new ContactDetail_Search()
+                    {
+                        RefId = Convert.ToInt32(vResultObj.Id),
+                        RefType = "Transporter"
+                    };
+
+                    // Contact Detail
+                    var vResultContactListObj = await _contactDetailRepository.GetContactDetailList(vContactDetail_Search);
+                    vResultObj.ContactDetail = vResultContactListObj.ToList();
+
+                    //Address Detail
+                    var vAddress_Search = new Address_Search()
+                    {
+                        RefId = Convert.ToInt32(vResultObj.Id),
+                        RefType = "Transporter"
+                    };
+
+                    var vResultAddressListObj = await _addressRepository.GetAddressList(vAddress_Search);
+                    vResultObj.AddressDetail = vResultAddressListObj.ToList();
+                }
 
                 _response.Data = vResultObj;
             }
