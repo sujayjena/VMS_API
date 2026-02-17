@@ -2,10 +2,12 @@
 using Microsoft.AspNetCore.Mvc;
 using OfficeOpenXml;
 using OfficeOpenXml.Style;
+using System.Linq;
 using VMS.Application.Enums;
 using VMS.Application.Helpers;
 using VMS.Application.Interfaces;
 using VMS.Application.Models;
+using VMS.Persistence.Repositories;
 
 namespace VMS.API.Controllers
 {
@@ -15,11 +17,15 @@ namespace VMS.API.Controllers
     {
         private ResponseModel _response;
         private readonly IManageSupplierRepository _manageSupplierRepository;
+        private readonly IContactDetailRepository _contactDetailRepository;
+        private readonly IAddressRepository _addressRepository;
         private IFileManager _fileManager;
 
-        public ManageSupplierController(IManageSupplierRepository manageSupplierRepository, IFileManager fileManager)
+        public ManageSupplierController(IManageSupplierRepository manageSupplierRepository, IContactDetailRepository contactDetailRepository, IAddressRepository addressRepository, IFileManager fileManager)
         {
             _manageSupplierRepository = manageSupplierRepository;
+            _contactDetailRepository = contactDetailRepository;
+            _addressRepository = addressRepository;
             _fileManager = fileManager;
 
             _response = new ResponseModel();
@@ -77,6 +83,37 @@ namespace VMS.API.Controllers
                 {
                     _response.Message = "Record details saved successfully";
                 }
+
+                #region Contact Details
+                foreach (var items in parameters.ContactDetail)
+                {
+                    items.RefId = result;
+                    items.RefType = "Supplier";
+
+                    // Image Upload
+                    if (parameters != null && !string.IsNullOrWhiteSpace(items.AadharCardImage_Base64))
+                    {
+                        var vUploadFile_AadharCardImage = _fileManager.UploadDocumentsBase64ToFile(items.AadharCardImage_Base64, "\\Uploads\\Supplier\\", items.AadharCardOriginalFileName);
+
+                        if (!string.IsNullOrWhiteSpace(vUploadFile_AadharCardImage))
+                        {
+                            items.AadharCardImageFileName = vUploadFile_AadharCardImage;
+                        }
+                    }
+
+                    int resultContact = await _contactDetailRepository.SaveContactDetail(items);
+                }
+                #endregion
+
+                #region Address Details
+                foreach (var items in parameters.AddressDetail)
+                {
+                    items.RefId = result;
+                    items.RefType = "Supplier";
+
+                    int resultAddress = await _addressRepository.SaveAddress(items);
+                }
+                #endregion
             }
             return _response;
         }
@@ -85,7 +122,7 @@ namespace VMS.API.Controllers
         [HttpPost]
         public async Task<ResponseModel> GetSupplierList(Supplier_Search parameters)
         {
-            IEnumerable<Supplier_Response> lstRoles = await _manageSupplierRepository.GetSupplierList(parameters);
+            IEnumerable<SupplierList_Response> lstRoles = await _manageSupplierRepository.GetSupplierList(parameters);
 
             _response.Data = lstRoles.ToList();
             _response.Total = parameters.Total;
@@ -103,6 +140,28 @@ namespace VMS.API.Controllers
             else
             {
                 var vResultObj = await _manageSupplierRepository.GetSupplierById(Id);
+                if (vResultObj != null)
+                {
+                    var vContactDetail_Search = new ContactDetail_Search()
+                    {
+                        RefId = Convert.ToInt32(vResultObj.Id),
+                        RefType = "Supplier"
+                    };
+
+                    // Contact Detail
+                    var vResultContactListObj = await _contactDetailRepository.GetContactDetailList(vContactDetail_Search);
+                    vResultObj.ContactDetail = vResultContactListObj.ToList();
+
+                    //Address Detail
+                    var vAddress_Search = new Address_Search()
+                    {
+                        RefId = Convert.ToInt32(vResultObj.Id),
+                        RefType = "Supplier"
+                    };
+
+                    var vResultAddressListObj = await _addressRepository.GetAddressList(vAddress_Search);
+                    vResultObj.AddressDetail = vResultAddressListObj.ToList();
+                }
 
                 _response.Data = vResultObj;
             }

@@ -49,14 +49,56 @@ namespace VMS.Application.Models
         public int? DistrictId { get; set; }
         public string? PinCode { get; set; }
         public bool? IsActive { get; set; }
+
+        public List<ContactDetail_Request> ContactDetail { get; set; }
+        public List<Address_Request> AddressDetail { get; set; }
     }
 
     public class Supplier_Search : BaseSearchEntity
     {
     }
 
+    public class SupplierList_Response : BaseResponseEntity
+    {
+        public string? SupplierCode { get; set; }
+        public string? SupplierName { get; set; }
+        public string? LandlineNumber { get; set; }
+        public string? MobileNumber { get; set; }
+        public string? EmailId { get; set; }
+        public string? SpecialRemarks { get; set; }
+
+        public string? PanCardNumber { get; set; }
+
+        [DefaultValue("")]
+        public string? PanCardOriginalFileName { get; set; }
+
+        [DefaultValue("")]
+        public string? PanCardFileName { get; set; }
+
+        [DefaultValue("")]
+        public string? PanCardUrl { get; set; }
+
+        public string? GSTNumber { get; set; }
+
+        [DefaultValue("")]
+        public string? GSTOriginalFileName { get; set; }
+
+        [DefaultValue("")]
+        public string? GSTFileName { get; set; }
+
+        [DefaultValue("")]
+        public string? GSTUrl { get; set; }
+
+        public bool? IsActive { get; set; }
+    }
+
     public class Supplier_Response : BaseResponseEntity
     {
+        public Supplier_Response()
+        {
+            ContactDetail = new List<ContactDetail_Response>();
+            AddressDetail = new List<Address_Response>();
+        }
         public string? SupplierCode { get; set; }
         public string? SupplierName { get; set; }
         public string? LandlineNumber { get; set; }
@@ -98,5 +140,7 @@ namespace VMS.Application.Models
         public string? DistrictName { get; set; }
         public string? PinCode { get; set; }
         public bool? IsActive { get; set; }
+        public List<ContactDetail_Response> ContactDetail { get; set; }
+        public List<Address_Response> AddressDetail { get; set; }
     }
 }

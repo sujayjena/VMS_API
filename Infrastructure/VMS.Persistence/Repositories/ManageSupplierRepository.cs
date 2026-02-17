@@ -50,7 +50,7 @@ namespace VMS.Persistence.Repositories
             return await SaveByStoredProcedure<int>("SaveSupplier", queryParameters);
         }
 
-        public async Task<IEnumerable<Supplier_Response>> GetSupplierList(Supplier_Search parameters)
+        public async Task<IEnumerable<SupplierList_Response>> GetSupplierList(Supplier_Search parameters)
         {
             DynamicParameters queryParameters = new DynamicParameters();
             queryParameters.Add("@SearchText", parameters.SearchText.SanitizeValue());
@@ -60,7 +60,7 @@ namespace VMS.Persistence.Repositories
             queryParameters.Add("@Total", parameters.Total, null, System.Data.ParameterDirection.Output);
             queryParameters.Add("@UserId", SessionManager.LoggedInUserId);
 
-            var result = await ListByStoredProcedure<Supplier_Response>("GetSupplierList", queryParameters);
+            var result = await ListByStoredProcedure<SupplierList_Response>("GetSupplierList", queryParameters);
             parameters.Total = queryParameters.Get<int>("Total");
 
             return result;
