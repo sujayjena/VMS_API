@@ -1662,13 +1662,13 @@ namespace VMS.API.Controllers.Admin
 
         #endregion
 
-        #region Item Group
+        #region Group
 
         [Route("[action]")]
         [HttpPost]
-        public async Task<ResponseModel> SaveItemGroup(ItemGroup_Request parameters)
+        public async Task<ResponseModel> SaveGroup(Group_Request parameters)
         {
-            int result = await _adminMasterRepository.SaveItemGroup(parameters);
+            int result = await _adminMasterRepository.SaveGroup(parameters);
 
             if (result == (int)SaveOperationEnums.NoRecordExists)
             {
@@ -1699,9 +1699,9 @@ namespace VMS.API.Controllers.Admin
 
         [Route("[action]")]
         [HttpPost]
-        public async Task<ResponseModel> GetItemGroupList(BaseSearchEntity parameters)
+        public async Task<ResponseModel> GetGroupList(BaseSearchEntity parameters)
         {
-            IEnumerable<ItemGroup_Response> lstRoles = await _adminMasterRepository.GetItemGroupList(parameters);
+            IEnumerable<Group_Response> lstRoles = await _adminMasterRepository.GetGroupList(parameters);
             _response.Data = lstRoles.ToList();
             _response.Total = parameters.Total;
             return _response;
@@ -1709,7 +1709,7 @@ namespace VMS.API.Controllers.Admin
 
         [Route("[action]")]
         [HttpPost]
-        public async Task<ResponseModel> GetItemGroupById(int Id)
+        public async Task<ResponseModel> GetGroupById(int Id)
         {
             if (Id <= 0)
             {
@@ -1717,7 +1717,7 @@ namespace VMS.API.Controllers.Admin
             }
             else
             {
-                var vResultObj = await _adminMasterRepository.GetItemGroupById(Id);
+                var vResultObj = await _adminMasterRepository.GetGroupById(Id);
                 _response.Data = vResultObj;
             }
             return _response;
@@ -1780,6 +1780,69 @@ namespace VMS.API.Controllers.Admin
             else
             {
                 var vResultObj = await _adminMasterRepository.GetItemById(Id);
+                _response.Data = vResultObj;
+            }
+            return _response;
+        }
+
+        #endregion
+
+        #region Item Group
+
+        [Route("[action]")]
+        [HttpPost]
+        public async Task<ResponseModel> SaveItemGroup(ItemGroup_Request parameters)
+        {
+            int result = await _adminMasterRepository.SaveItemGroup(parameters);
+
+            if (result == (int)SaveOperationEnums.NoRecordExists)
+            {
+                _response.Message = "No record exists";
+            }
+            else if (result == (int)SaveOperationEnums.ReocrdExists)
+            {
+                _response.Message = "Record is already exists";
+            }
+            else if (result == (int)SaveOperationEnums.NoResult)
+            {
+                _response.Message = "Something went wrong, please try again";
+            }
+            else
+            {
+                if (parameters.Id > 0)
+                {
+                    _response.Message = "Record updated successfully";
+                }
+                else
+                {
+                    _response.Message = "Record details saved successfully";
+                }
+            }
+            return _response;
+        }
+
+
+        [Route("[action]")]
+        [HttpPost]
+        public async Task<ResponseModel> GetItemGroupList(BaseSearchEntity parameters)
+        {
+            IEnumerable<ItemGroup_Response> lstRoles = await _adminMasterRepository.GetItemGroupList(parameters);
+            _response.Data = lstRoles.ToList();
+            _response.Total = parameters.Total;
+            return _response;
+        }
+
+        [Route("[action]")]
+        [HttpPost]
+        public async Task<ResponseModel> GetItemGroupById(int Id)
+        {
+            if (Id <= 0)
+            {
+                _response.Message = "Id is required";
+            }
+            else
+            {
+                var vResultObj = await _adminMasterRepository.GetItemGroupById(Id);
                 _response.Data = vResultObj;
             }
             return _response;

@@ -521,6 +521,7 @@ namespace VMS.Persistence.Repositories
             queryParameters.Add("@Batch", parameters.Batch);
             queryParameters.Add("@CompanyId", parameters.CompanyId);
             queryParameters.Add("@BranchId", parameters.BranchId);
+            queryParameters.Add("@MinQty", parameters.MinQty);
             queryParameters.Add("@IsActive", parameters.IsActive);
             queryParameters.Add("@UserId", SessionManager.LoggedInUserId);
 
@@ -1049,19 +1050,19 @@ namespace VMS.Persistence.Repositories
 
         #endregion
 
-        #region Item Group
-        public async Task<int> SaveItemGroup(ItemGroup_Request parameters)
+        #region Group
+        public async Task<int> SaveGroup(Group_Request parameters)
         {
             DynamicParameters queryParameters = new DynamicParameters();
             queryParameters.Add("@Id", parameters.Id);
-            queryParameters.Add("@ItemGroupName", parameters.ItemGroupName);
+            queryParameters.Add("@GroupName", parameters.GroupName);
             queryParameters.Add("@IsActive", parameters.IsActive);
             queryParameters.Add("@UserId", SessionManager.LoggedInUserId);
 
-            return await SaveByStoredProcedure<int>("SaveItemGroup", queryParameters);
+            return await SaveByStoredProcedure<int>("SaveGroup", queryParameters);
         }
 
-        public async Task<IEnumerable<ItemGroup_Response>> GetItemGroupList(BaseSearchEntity parameters)
+        public async Task<IEnumerable<Group_Response>> GetGroupList(BaseSearchEntity parameters)
         {
             DynamicParameters queryParameters = new DynamicParameters();
             queryParameters.Add("@SearchText", parameters.SearchText.SanitizeValue());
@@ -1071,17 +1072,17 @@ namespace VMS.Persistence.Repositories
             queryParameters.Add("@Total", parameters.Total, null, System.Data.ParameterDirection.Output);
             queryParameters.Add("@UserId", SessionManager.LoggedInUserId);
 
-            var result = await ListByStoredProcedure<ItemGroup_Response>("GetItemGroupList", queryParameters);
+            var result = await ListByStoredProcedure<Group_Response>("GetGroupList", queryParameters);
             parameters.Total = queryParameters.Get<int>("Total");
 
             return result;
         }
 
-        public async Task<ItemGroup_Response?> GetItemGroupById(int Id)
+        public async Task<Group_Response?> GetGroupById(int Id)
         {
             DynamicParameters queryParameters = new DynamicParameters();
             queryParameters.Add("@Id", Id);
-            return (await ListByStoredProcedure<ItemGroup_Response>("GetItemGroupById", queryParameters)).FirstOrDefault();
+            return (await ListByStoredProcedure<Group_Response>("GetGroupById", queryParameters)).FirstOrDefault();
         }
 
         #endregion
@@ -1119,6 +1120,44 @@ namespace VMS.Persistence.Repositories
             DynamicParameters queryParameters = new DynamicParameters();
             queryParameters.Add("@Id", Id);
             return (await ListByStoredProcedure<Item_Response>("GetItemById", queryParameters)).FirstOrDefault();
+        }
+
+        #endregion
+
+        #region Item Group
+        public async Task<int> SaveItemGroup(ItemGroup_Request parameters)
+        {
+            DynamicParameters queryParameters = new DynamicParameters();
+            queryParameters.Add("@Id", parameters.Id);
+            queryParameters.Add("@GroupId", parameters.GroupId);
+            queryParameters.Add("@ItemId", parameters.ItemId);
+            queryParameters.Add("@IsActive", parameters.IsActive);
+            queryParameters.Add("@UserId", SessionManager.LoggedInUserId);
+
+            return await SaveByStoredProcedure<int>("SaveItemGroup", queryParameters);
+        }
+
+        public async Task<IEnumerable<ItemGroup_Response>> GetItemGroupList(BaseSearchEntity parameters)
+        {
+            DynamicParameters queryParameters = new DynamicParameters();
+            queryParameters.Add("@SearchText", parameters.SearchText.SanitizeValue());
+            queryParameters.Add("@IsActive", parameters.IsActive);
+            queryParameters.Add("@PageNo", parameters.PageNo);
+            queryParameters.Add("@PageSize", parameters.PageSize);
+            queryParameters.Add("@Total", parameters.Total, null, System.Data.ParameterDirection.Output);
+            queryParameters.Add("@UserId", SessionManager.LoggedInUserId);
+
+            var result = await ListByStoredProcedure<ItemGroup_Response>("GetItemGroupList", queryParameters);
+            parameters.Total = queryParameters.Get<int>("Total");
+
+            return result;
+        }
+
+        public async Task<ItemGroup_Response?> GetItemGroupById(int Id)
+        {
+            DynamicParameters queryParameters = new DynamicParameters();
+            queryParameters.Add("@Id", Id);
+            return (await ListByStoredProcedure<ItemGroup_Response>("GetItemGroupById", queryParameters)).FirstOrDefault();
         }
 
         #endregion

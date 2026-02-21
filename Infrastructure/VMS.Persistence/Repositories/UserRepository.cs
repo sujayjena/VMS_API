@@ -81,6 +81,7 @@ namespace VMS.Persistence.Repositories
             queryParameters.Add("@IsManager", parameters.IsManager);
             queryParameters.Add("@IsApprover", parameters.IsApprover);
             queryParameters.Add("@LastWorkingDate", parameters.LastWorkingDate);
+            queryParameters.Add("@IsSupervisor", parameters.IsSupervisor);
             queryParameters.Add("@IsMobileUser", parameters.IsMobileUser);
             queryParameters.Add("@IsWebUser", parameters.IsWebUser);
             queryParameters.Add("@IsActive", parameters.IsActive);

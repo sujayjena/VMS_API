@@ -289,6 +289,7 @@ namespace VMS.Application.Models
 
         public int? CompanyId { get; set; }
         public int? BranchId { get; set; }
+        public decimal? MinQty { get; set; }
 
         public bool? IsActive { get; set; }
     }
@@ -307,7 +308,7 @@ namespace VMS.Application.Models
         public string? CompanyName { get; set; }
         public int? BranchId { get; set; }
         public string? BranchName { get; set; }
-
+        public decimal? MinQty { get; set; }
         public bool? IsActive { get; set; }
     }
 
@@ -583,18 +584,18 @@ namespace VMS.Application.Models
     }
     #endregion
 
-    #region Item Group
-    public class ItemGroup_Request : BaseEntity
+    #region Group
+    public class Group_Request : BaseEntity
     {
         [DefaultValue("")]
-        public string? ItemGroupName { get; set; }
+        public string? GroupName { get; set; }
 
         public bool? IsActive { get; set; }
     }
 
-    public class ItemGroup_Response : BaseResponseEntity
+    public class Group_Response : BaseResponseEntity
     {
-        public string? ItemGroupName { get; set; }
+        public string? GroupName { get; set; }
 
         public bool? IsActive { get; set; }
     }
@@ -613,6 +614,24 @@ namespace VMS.Application.Models
     {
         public string? ItemName { get; set; }
 
+        public bool? IsActive { get; set; }
+    }
+    #endregion
+
+    #region Item Group
+    public class ItemGroup_Request : BaseEntity
+    {
+        public int? GroupId { get; set; }
+        public int? ItemId { get; set; }
+        public bool? IsActive { get; set; }
+    }
+
+    public class ItemGroup_Response : BaseResponseEntity
+    {
+        public int? GroupId { get; set; }
+        public string? GroupName { get; set; }
+        public int? ItemId { get; set; }
+        public string? ItemName { get; set; }
         public bool? IsActive { get; set; }
     }
     #endregion

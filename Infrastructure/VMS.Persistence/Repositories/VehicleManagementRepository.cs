@@ -37,6 +37,7 @@ namespace VMS.Persistence.Repositories
             queryParameters.Add("@AttachmentOriginalFileName", parameters.AttachmentOriginalFileName);
             queryParameters.Add("@AttachmentFileName", parameters.AttachmentFileName);
             queryParameters.Add("@DocumentTypeId", parameters.DocumentTypeId);
+            queryParameters.Add("@DocumentNumber", parameters.DocumentNumber);
             queryParameters.Add("@DocumentOriginalFileName", parameters.DocumentOriginalFileName);
             queryParameters.Add("@DocumentFileName", parameters.DocumentFileName);
             queryParameters.Add("@IsActive", parameters.IsActive);

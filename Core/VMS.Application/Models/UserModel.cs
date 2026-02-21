@@ -145,6 +145,9 @@ namespace VMS.Application.Models
         [DefaultValue(null)]
         public DateTime? LastWorkingDate { get; set; }
 
+        [DefaultValue(false)]
+        public bool? IsSupervisor { get; set; }
+
         public bool? IsMobileUser { get; set; }
 
         public bool? IsWebUser { get; set; }
@@ -299,7 +302,7 @@ namespace VMS.Application.Models
         public bool? IsApprover { get; set; }
 
         public DateTime? LastWorkingDate { get; set; }
-
+        public bool? IsSupervisor { get; set; }
         public bool? IsMobileUser { get; set; }
 
         public bool? IsWebUser { get; set; }

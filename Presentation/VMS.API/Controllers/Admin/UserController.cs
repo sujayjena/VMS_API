@@ -200,6 +200,10 @@ namespace VMS.API.Controllers.Admin
             {
                 _response.Message = "Mobile Number already exists";
             }
+            else if (result == -5)
+            {
+                _response.Message = "Supervisor already exists for this department";
+            }
             else if (result == (int)SaveOperationEnums.NoResult)
             {
                 _response.Message = "Something went wrong, please try again";

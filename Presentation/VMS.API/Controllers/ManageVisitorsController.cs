@@ -1191,7 +1191,7 @@ namespace VMS.API.Controllers
                         WorkSheet1.Cells[recordIndex, 13].Value = items.StateName;
                         WorkSheet1.Cells[recordIndex, 14].Value = items.DistrictName;
                         WorkSheet1.Cells[recordIndex, 15].Value = items.Pincode;
-                        WorkSheet1.Cells[recordIndex, 16].Value = items.MeetingType;
+                        WorkSheet1.Cells[recordIndex, 16].Value = items.VisitType;
                         WorkSheet1.Cells[recordIndex, 17].Value = items.BranchName;
                         WorkSheet1.Cells[recordIndex, 18].Value = items.DepartmentName;
                         WorkSheet1.Cells[recordIndex, 19].Value = strGateNumberList;

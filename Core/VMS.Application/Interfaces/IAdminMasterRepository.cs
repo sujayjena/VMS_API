@@ -225,12 +225,12 @@ namespace VMS.Application.Interfaces
 
         #endregion
 
-        #region Item Group
-        Task<int> SaveItemGroup(ItemGroup_Request parameters);
+        #region Group
+        Task<int> SaveGroup(Group_Request parameters);
 
-        Task<IEnumerable<ItemGroup_Response>> GetItemGroupList(BaseSearchEntity parameters);
+        Task<IEnumerable<Group_Response>> GetGroupList(BaseSearchEntity parameters);
 
-        Task<ItemGroup_Response?> GetItemGroupById(int Id);
+        Task<Group_Response?> GetGroupById(int Id);
 
         #endregion
 
@@ -240,6 +240,15 @@ namespace VMS.Application.Interfaces
         Task<IEnumerable<Item_Response>> GetItemList(BaseSearchEntity parameters);
 
         Task<Item_Response?> GetItemById(int Id);
+
+        #endregion
+
+        #region Item Group
+        Task<int> SaveItemGroup(ItemGroup_Request parameters);
+
+        Task<IEnumerable<ItemGroup_Response>> GetItemGroupList(BaseSearchEntity parameters);
+
+        Task<ItemGroup_Response?> GetItemGroupById(int Id);
 
         #endregion
 

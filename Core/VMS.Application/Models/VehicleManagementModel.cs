@@ -29,6 +29,7 @@ namespace VMS.Application.Models
         [DefaultValue("")]
         public string? Attachment_Base64 { get; set; }
         public int? DocumentTypeId { get; set; }
+        public string? DocumentNumber { get; set; }
 
         [DefaultValue("")]
         public string? DocumentOriginalFileName { get; set; }
@@ -61,6 +62,7 @@ namespace VMS.Application.Models
         public string? AttachmentUrl { get; set; }
         public int? DocumentTypeId { get; set; }
         public string? DocumentType { get; set; }
+        public string? DocumentNumber { get; set; }
         public string? DocumentOriginalFileName { get; set; }
         public string? DocumentFileName { get; set; }
         public string? DocumentUrl { get; set; }
