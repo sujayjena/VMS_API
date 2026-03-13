@@ -42,6 +42,11 @@ namespace VMS.Application.Models
 
     public class VehicleManagement_Search : BaseSearchEntity
     {
+        [DefaultValue(null)]
+        public DateTime? FromDate { get; set; }
+
+        [DefaultValue(null)]
+        public DateTime? ToDate { get; set; }
     }
 
     public class VehicleManagement_Response : BaseResponseEntity
