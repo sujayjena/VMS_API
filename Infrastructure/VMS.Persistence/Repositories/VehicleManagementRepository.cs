@@ -31,6 +31,7 @@ namespace VMS.Persistence.Repositories
             queryParameters.Add("@ItemId", parameters.ItemId);
             queryParameters.Add("@TruckNumber", parameters.TruckNumber);
             queryParameters.Add("@DriverName", parameters.DriverName);
+            queryParameters.Add("@DriverMobileNo", parameters.DriverMobileNo);
             queryParameters.Add("@DriverLicenceNumber", parameters.DriverLicenceNumber);
             queryParameters.Add("@LicenceValidFrom", parameters.LicenceValidFrom);
             queryParameters.Add("@LicenceValidTo", parameters.LicenceValidTo);
@@ -69,6 +70,52 @@ namespace VMS.Persistence.Repositories
             DynamicParameters queryParameters = new DynamicParameters();
             queryParameters.Add("@Id", Id);
             return (await ListByStoredProcedure<VehicleManagement_Response>("GetVehicleManagementById", queryParameters)).FirstOrDefault();
+        }
+
+        public async Task<int> SaveVehicleManagementItem(VehicleManagementItem_Request parameters)
+        {
+            DynamicParameters queryParameters = new DynamicParameters();
+            queryParameters.Add("@Action", parameters.Action);
+            queryParameters.Add("@VehicleManagementId", parameters.VehicleManagementId);
+            queryParameters.Add("@Itemid", parameters.Itemid);
+            queryParameters.Add("@UserId", SessionManager.LoggedInUserId);
+
+            return await SaveByStoredProcedure<int>("SaveVehicleManagementItem", queryParameters);
+        }
+
+        public async Task<IEnumerable<VehicleManagementItem_Response>> GetVehicleManagementItemById(long VehicleManagementId, long ItemId)
+        {
+            DynamicParameters queryParameters = new DynamicParameters();
+            queryParameters.Add("@VehicleManagementId", VehicleManagementId);
+            queryParameters.Add("@ItemId", ItemId);
+            queryParameters.Add("@UserId", SessionManager.LoggedInUserId);
+
+            var result = await ListByStoredProcedure<VehicleManagementItem_Response>("GetVehicleManagementItemById", queryParameters);
+
+            return result;
+        }
+
+        public async Task<int> SaveVehicleManagementGateNo(VehicleManagementGateNo_Request parameters)
+        {
+            DynamicParameters queryParameters = new DynamicParameters();
+            queryParameters.Add("@Action", parameters.Action);
+            queryParameters.Add("@VehicleManagementId", parameters.VehicleManagementId);
+            queryParameters.Add("@GateDetailsId", parameters.GateDetailsId);
+            queryParameters.Add("@UserId", SessionManager.LoggedInUserId);
+
+            return await SaveByStoredProcedure<int>("SaveVehicleManagementGateNo", queryParameters);
+        }
+
+        public async Task<IEnumerable<VehicleManagementGateNo_Response>> GetVehicleManagementGateNoById(long VehicleManagementId, long GateDetailsId)
+        {
+            DynamicParameters queryParameters = new DynamicParameters();
+            queryParameters.Add("@VehicleManagementId", VehicleManagementId);
+            queryParameters.Add("@GateDetailsId", GateDetailsId);
+            queryParameters.Add("@UserId", SessionManager.LoggedInUserId);
+
+            var result = await ListByStoredProcedure<VehicleManagementGateNo_Response>("GetVehicleManagementGateNoById", queryParameters);
+
+            return result;
         }
         #endregion
 

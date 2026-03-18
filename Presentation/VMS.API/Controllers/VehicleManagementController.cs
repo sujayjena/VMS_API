@@ -4,6 +4,7 @@ using VMS.Application.Enums;
 using VMS.Application.Helpers;
 using VMS.Application.Interfaces;
 using VMS.Application.Models;
+using VMS.Persistence.Repositories;
 
 namespace VMS.API.Controllers
 {
@@ -75,6 +76,60 @@ namespace VMS.API.Controllers
                 {
                     _response.Message = "Record details saved successfully";
                 }
+
+                #region // Add/Update Item
+
+                // Delete Assign
+                var vItemDELETEObj = new VehicleManagementItem_Request()
+                {
+                    Action = "DELETE",
+                    VehicleManagementId = result,
+                    Itemid = 0
+                };
+                int resultItemDELETE = await _vehicleManagementRepository.SaveVehicleManagementItem(vItemDELETEObj);
+
+
+                // add new Item details
+                foreach (var vItem in parameters.ItemList)
+                {
+                    var vItemMapObj = new VehicleManagementItem_Request()
+                    {
+                        Action = "INSERT",
+                        VehicleManagementId = result,
+                        Itemid = vItem.Itemid
+                    };
+
+                    int resultitem = await _vehicleManagementRepository.SaveVehicleManagementItem(vItemMapObj);
+                }
+
+                #endregion
+
+                #region // Add/Update GateNo
+
+                // Delete Assign
+                var vGateNoDELETEObj = new VehicleManagementGateNo_Request()
+                {
+                    Action = "DELETE",
+                    VehicleManagementId = result,
+                    GateDetailsId = 0
+                };
+                int resultGateNoDELETE = await _vehicleManagementRepository.SaveVehicleManagementGateNo(vGateNoDELETEObj);
+
+
+                // add new gate details
+                foreach (var vGateitem in parameters.GateNumberList)
+                {
+                    var vGateNoMapObj = new VehicleManagementGateNo_Request()
+                    {
+                        Action = "INSERT",
+                        VehicleManagementId = result,
+                        GateDetailsId = vGateitem.GateDetailsId
+                    };
+
+                    int resultGateNo = await _vehicleManagementRepository.SaveVehicleManagementGateNo(vGateNoMapObj);
+                }
+
+                #endregion
             }
             return _response;
         }
@@ -101,6 +156,14 @@ namespace VMS.API.Controllers
             else
             {
                 var vResultObj = await _vehicleManagementRepository.GetVehicleManagementById(Id);
+                if (vResultObj != null)
+                {
+                    var itemlistObj = await _vehicleManagementRepository.GetVehicleManagementItemById(vResultObj.Id, 0);
+                    vResultObj.ItemList = itemlistObj.ToList();
+
+                    var gateNolistObj = await _vehicleManagementRepository.GetVehicleManagementGateNoById(vResultObj.Id, 0);
+                    vResultObj.GateNumberList = gateNolistObj.ToList();
+                }
 
                 _response.Data = vResultObj;
             }

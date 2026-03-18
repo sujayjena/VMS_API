@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using VMS.Domain.Entities;
 using VMS.Persistence.Repositories;
@@ -12,12 +13,18 @@ namespace VMS.Application.Models
     #region Vehicle Management
     public class VehicleManagement_Request : BaseEntity
     {
+        public VehicleManagement_Request()
+        {
+            ItemList = new List<VehicleManagementItem_Request>();
+            GateNumberList = new List<VehicleManagementGateNo_Request>();
+        }
         public DateTime? ReceivingDate { get; set; }
         public string? PONumber { get; set; }
         public int? SupplierId { get; set; }
         public int? ItemId { get; set; }
         public string? TruckNumber { get; set; }
         public string? DriverName { get; set; }
+        public string? DriverMobileNo { get; set; }
         public string? DriverLicenceNumber { get; set; }
         public DateTime? LicenceValidFrom { get; set; }
         public DateTime? LicenceValidTo { get; set; }
@@ -38,6 +45,9 @@ namespace VMS.Application.Models
         [DefaultValue("")]
         public string? Document_Base64 { get; set; }
         public bool? IsActive { get; set; }
+
+        public List<VehicleManagementItem_Request> ItemList { get; set; }
+        public List<VehicleManagementGateNo_Request> GateNumberList { get; set; }
     }
 
     public class VehicleManagement_Search : BaseSearchEntity
@@ -59,6 +69,7 @@ namespace VMS.Application.Models
         public string? ItemName { get; set; }
         public string? TruckNumber { get; set; }
         public string? DriverName { get; set; }
+        public string? DriverMobileNo { get; set; }
         public string? DriverLicenceNumber { get; set; }
         public DateTime? LicenceValidFrom { get; set; }
         public DateTime? LicenceValidTo { get; set; }
@@ -72,6 +83,49 @@ namespace VMS.Application.Models
         public string? DocumentFileName { get; set; }
         public string? DocumentUrl { get; set; }
         public bool? IsActive { get; set; }
+
+        public List<VehicleManagementItem_Response> ItemList { get; set; }
+        public List<VehicleManagementGateNo_Response> GateNumberList { get; set; }
+    }
+
+    public class VehicleManagementItem_Request
+    {
+        public int Id { get; set; }
+
+        [JsonIgnore]
+        public string? Action { get; set; }
+
+        [JsonIgnore]
+        public int? VehicleManagementId { get; set; }
+        public int? Itemid { get; set; }
+    }
+
+    public class VehicleManagementItem_Response
+    {
+        public int Id { get; set; }
+        public int? VehicleManagementId { get; set; }
+        public int? Itemid { get; set; }
+        public string? ItemName { get; set; }
+    }
+
+    public class VehicleManagementGateNo_Request
+    {
+        public int Id { get; set; }
+
+        [JsonIgnore]
+        public string? Action { get; set; }
+
+        [JsonIgnore]
+        public int? VehicleManagementId { get; set; }
+        public int? GateDetailsId { get; set; }
+    }
+
+    public class VehicleManagementGateNo_Response
+    {
+        public int Id { get; set; }
+        public int? VehicleManagementId { get; set; }
+        public int? GateDetailsId { get; set; }
+        public string? GateNumber { get; set; }
     }
     #endregion
 

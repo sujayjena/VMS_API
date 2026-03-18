@@ -13,6 +13,13 @@ namespace VMS.Application.Interfaces
         Task<int> SaveVehicleManagement(VehicleManagement_Request parameters);
         Task<IEnumerable<VehicleManagement_Response>> GetVehicleManagementList(VehicleManagement_Search parameters);
         Task<VehicleManagement_Response?> GetVehicleManagementById(int Id);
+
+        Task<int> SaveVehicleManagementItem(VehicleManagementItem_Request parameters);
+        Task<IEnumerable<VehicleManagementItem_Response>> GetVehicleManagementItemById(long VehicleManagementId, long ItemId);
+
+        Task<int> SaveVehicleManagementGateNo(VehicleManagementGateNo_Request parameters);
+        Task<IEnumerable<VehicleManagementGateNo_Response>> GetVehicleManagementGateNoById(long VehicleManagementId, long GateDetailsId);
+
         #endregion
 
         #region Material Weight
