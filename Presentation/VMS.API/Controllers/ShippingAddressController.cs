@@ -9,15 +9,15 @@ namespace VMS.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class AddressController : CustomBaseController
+    public class ShippingAddressController : CustomBaseController
     {
         private ResponseModel _response;
-        private readonly IAddressRepository _addressRepository;
+        private readonly IShippingAddressRepository _shippingAddressRepository;
         private IFileManager _fileManager;
 
-        public AddressController(IAddressRepository addressRepository, IFileManager fileManager)
+        public ShippingAddressController(IShippingAddressRepository shippingAddressRepository, IFileManager fileManager)
         {
-            _addressRepository = addressRepository;
+            _shippingAddressRepository = shippingAddressRepository;
 
             _response = new ResponseModel();
             _response.IsSuccess = true;
@@ -26,12 +26,12 @@ namespace VMS.API.Controllers
 
         [Route("[action]")]
         [HttpPost]
-        public async Task<ResponseModel> SaveAddress(Address_Request parameters)
+        public async Task<ResponseModel> SaveShippingAddress(ShippingAddress_Request parameters)
         {
             //GST Upload
             if (parameters != null && !string.IsNullOrWhiteSpace(parameters.GST_Base64))
             {
-                var vUploadFile = _fileManager.UploadDocumentsBase64ToFile(parameters.GST_Base64, "\\Uploads\\BillingAddress\\", parameters.GSTOriginalFileName);
+                var vUploadFile = _fileManager.UploadDocumentsBase64ToFile(parameters.GST_Base64, "\\Uploads\\ShippingAddress\\", parameters.GSTOriginalFileName);
 
                 if (!string.IsNullOrWhiteSpace(vUploadFile))
                 {
@@ -39,7 +39,7 @@ namespace VMS.API.Controllers
                 }
             }
 
-            int result = await _addressRepository.SaveAddress(parameters);
+            int result = await _shippingAddressRepository.SaveShippingAddress(parameters);
 
             if (result == (int)SaveOperationEnums.NoRecordExists)
             {
@@ -64,9 +64,9 @@ namespace VMS.API.Controllers
 
         [Route("[action]")]
         [HttpPost]
-        public async Task<ResponseModel> GetAddressList(Address_Search parameters)
+        public async Task<ResponseModel> GetShippingAddressList(ShippingAddress_Search parameters)
         {
-            var objList = await _addressRepository.GetAddressList(parameters);
+            var objList = await _shippingAddressRepository.GetShippingAddressList(parameters);
             _response.Data = objList.ToList();
             _response.Total = parameters.Total;
             return _response;
@@ -74,7 +74,7 @@ namespace VMS.API.Controllers
 
         [Route("[action]")]
         [HttpPost]
-        public async Task<ResponseModel> GetAddressById(int Id)
+        public async Task<ResponseModel> GetShippingAddressById(int Id)
         {
             if (Id <= 0)
             {
@@ -82,10 +82,11 @@ namespace VMS.API.Controllers
             }
             else
             {
-                var vResultObj = await _addressRepository.GetAddressById(Id);
+                var vResultObj = await _shippingAddressRepository.GetShippingAddressById(Id);
                 _response.Data = vResultObj;
             }
             return _response;
         }
     }
 }
+

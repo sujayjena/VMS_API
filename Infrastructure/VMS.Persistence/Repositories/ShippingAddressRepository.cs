@@ -11,16 +11,16 @@ using VMS.Application.Models;
 
 namespace VMS.Persistence.Repositories
 {
-    public class AddressRepository : GenericRepository, IAddressRepository
+    public class ShippingAddressRepository : GenericRepository, IShippingAddressRepository
     {
         private IConfiguration _configuration;
 
-        public AddressRepository(IConfiguration configuration) : base(configuration)
+        public ShippingAddressRepository(IConfiguration configuration) : base(configuration)
         {
             _configuration = configuration;
         }
 
-        public async Task<int> SaveAddress(Address_Request parameters)
+        public async Task<int> SaveShippingAddress(ShippingAddress_Request parameters)
         {
             DynamicParameters queryParameters = new DynamicParameters();
 
@@ -42,10 +42,10 @@ namespace VMS.Persistence.Repositories
             queryParameters.Add("@IsActive", parameters.IsActive);
             queryParameters.Add("@UserId", SessionManager.LoggedInUserId);
 
-            return await SaveByStoredProcedure<int>("SaveAddress", queryParameters);
+            return await SaveByStoredProcedure<int>("SaveShippingAddress", queryParameters);
         }
 
-        public async Task<IEnumerable<Address_Response>> GetAddressList(Address_Search parameters)
+        public async Task<IEnumerable<ShippingAddress_Response>> GetShippingAddressList(ShippingAddress_Search parameters)
         {
             DynamicParameters queryParameters = new DynamicParameters();
 
@@ -58,19 +58,19 @@ namespace VMS.Persistence.Repositories
             queryParameters.Add("@Total", parameters.Total, null, System.Data.ParameterDirection.Output);
             queryParameters.Add("@UserId", SessionManager.LoggedInUserId);
 
-            var result = await ListByStoredProcedure<Address_Response>("GetAddressList", queryParameters);
+            var result = await ListByStoredProcedure<ShippingAddress_Response>("GetShippingAddressList", queryParameters);
             parameters.Total = queryParameters.Get<int>("Total");
 
             return result;
         }
 
-        public async Task<Address_Response?> GetAddressById(int Id)
+        public async Task<ShippingAddress_Response?> GetShippingAddressById(int Id)
         {
             DynamicParameters queryParameters = new DynamicParameters();
 
             queryParameters.Add("@Id", Id);
 
-            return (await ListByStoredProcedure<Address_Response>("GetAddressById", queryParameters)).FirstOrDefault();
+            return (await ListByStoredProcedure<ShippingAddress_Response>("GetShippingAddressById", queryParameters)).FirstOrDefault();
         }
     }
 }

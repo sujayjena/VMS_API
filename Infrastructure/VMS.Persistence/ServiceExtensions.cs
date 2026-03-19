@@ -54,6 +54,8 @@ namespace VMS.Persistence
             services.AddScoped<IManageStayRepository, ManageStayRepository>();
             services.AddScoped<IContactDetailRepository, ContactDetailRepository>();
             services.AddScoped<IAddressRepository, AddressRepository>();
+            services.AddScoped<IShippingAddressRepository, ShippingAddressRepository>();
+            services.AddScoped<ICustomerRepository, CustomerRepository>();
         }
     }
 }
