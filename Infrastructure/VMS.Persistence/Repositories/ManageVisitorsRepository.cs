@@ -204,6 +204,7 @@ namespace VMS.Persistence.Repositories
             queryParameters.Add("@GateDetailsId", parameters.GateDetailsId);
             queryParameters.Add("@IsPlanned_CheckIn_CheckOut", parameters.IsPlanned_CheckIn_CheckOut);
             queryParameters.Add("@IsPlanned", parameters.IsPlanned);
+            queryParameters.Add("@IsVehicleManagement", parameters.IsVehicleManagement);
             queryParameters.Add("@SearchText", parameters.SearchText.SanitizeValue());
             queryParameters.Add("@IsActive", parameters.IsActive);
             queryParameters.Add("@PageNo", parameters.PageNo);

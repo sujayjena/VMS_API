@@ -350,6 +350,9 @@ namespace VMS.Application.Models
 
         [DefaultValue(null)]
         public bool? IsPlanned { get; set; }
+
+        [DefaultValue(false)]
+        public bool? IsVehicleManagement { get; set; }
     }
 
     public class VisitorPlanned_Response : BaseResponseEntity

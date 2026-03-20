@@ -15,14 +15,18 @@ namespace VMS.API.Controllers
         private ResponseModel _response;
         private readonly IVehicleManagementRepository _vehicleManagementRepository;
         private IFileManager _fileManager;
+        private readonly IAssignGateNoRepository _assignGateNoRepository;
+        private readonly IBarcodeRepository _barcodeRepository;
 
-        public VehicleManagementController(IVehicleManagementRepository vehicleManagementRepository, IFileManager fileManager)
+        public VehicleManagementController(IVehicleManagementRepository vehicleManagementRepository, IFileManager fileManager, IAssignGateNoRepository assignGateNoRepository, IBarcodeRepository barcodeRepository)
         {
             _vehicleManagementRepository = vehicleManagementRepository;
             _fileManager = fileManager;
 
             _response = new ResponseModel();
             _response.IsSuccess = true;
+            _assignGateNoRepository = assignGateNoRepository;
+            _barcodeRepository = barcodeRepository;
         }
 
         #region Vehicle Management
@@ -106,29 +110,63 @@ namespace VMS.API.Controllers
 
                 #region // Add/Update GateNo
 
-                // Delete Assign
-                var vGateNoDELETEObj = new VehicleManagementGateNo_Request()
+                var vVehicleManagement = await _vehicleManagementRepository.GetVehicleManagementById(result);
+                if (vVehicleManagement != null)
                 {
-                    Action = "DELETE",
-                    VehicleManagementId = result,
-                    GateDetailsId = 0
-                };
-                int resultGateNoDELETE = await _vehicleManagementRepository.SaveVehicleManagementGateNo(vGateNoDELETEObj);
+                    #region // Add/Update Assign GateNo
 
-
-                // add new gate details
-                foreach (var vGateitem in parameters.GateNumberList)
-                {
-                    var vGateNoMapObj = new VehicleManagementGateNo_Request()
+                    // Delete Assign
+                    var vGateNoDELETEObj = new AssignGateNo_Request()
                     {
-                        Action = "INSERT",
-                        VehicleManagementId = result,
-                        GateDetailsId = vGateitem.GateDetailsId
+                        Action = "DELETE",
+                        RefId = vVehicleManagement.VisitorId,
+                        RefType = "Visitor",
+                        GateDetailsId = 0
                     };
+                    int resultGateNoDELETE = await _assignGateNoRepository.SaveAssignGateNo(vGateNoDELETEObj);
 
-                    int resultGateNo = await _vehicleManagementRepository.SaveVehicleManagementGateNo(vGateNoMapObj);
+
+                    // add new gate details
+                    foreach (var vGateitem in parameters.GateNumberList)
+                    {
+                        var vGateNoMapObj = new AssignGateNo_Request()
+                        {
+                            Action = "INSERT",
+                            RefId = vVehicleManagement.VisitorId,
+                            RefType = "Visitor",
+                            GateDetailsId = vGateitem.GateDetailsId
+                        };
+
+                        int resultGateNo = await _assignGateNoRepository.SaveAssignGateNo(vGateNoMapObj);
+                    }
+
+                    #endregion
                 }
 
+                #endregion
+
+                #region Generate barcode
+                if (parameters.Id == 0)
+                {
+                    if (vVehicleManagement != null)
+                    {
+                        var vGenerateBarcode = _barcodeRepository.GenerateBarcode(vVehicleManagement.VisitNumber);
+                        if (vGenerateBarcode.Barcode_Unique_Id != "")
+                        {
+                            var vBarcode_Request = new Barcode_Request()
+                            {
+                                Id = 0,
+                                BarcodeNo = vVehicleManagement.VisitNumber,
+                                BarcodeType = "Visitor",
+                                Barcode_Unique_Id = vGenerateBarcode.Barcode_Unique_Id,
+                                BarcodeOriginalFileName = vGenerateBarcode.BarcodeOriginalFileName,
+                                BarcodeFileName = vGenerateBarcode.BarcodeFileName,
+                                RefId = vVehicleManagement.VisitorId
+                            };
+                            var resultBarcode = _barcodeRepository.SaveBarcode(vBarcode_Request);
+                        }
+                    }
+                }
                 #endregion
             }
             return _response;
@@ -161,7 +199,7 @@ namespace VMS.API.Controllers
                     var itemlistObj = await _vehicleManagementRepository.GetVehicleManagementItemById(vResultObj.Id, 0);
                     vResultObj.ItemList = itemlistObj.ToList();
 
-                    var gateNolistObj = await _vehicleManagementRepository.GetVehicleManagementGateNoById(vResultObj.Id, 0);
+                    var gateNolistObj = await _assignGateNoRepository.GetAssignGateNoById(Convert.ToInt32(vResultObj.VisitorId), "Visitor", 0);
                     vResultObj.GateNumberList = gateNolistObj.ToList();
                 }
 

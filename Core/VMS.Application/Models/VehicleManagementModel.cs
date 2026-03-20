@@ -16,10 +16,11 @@ namespace VMS.Application.Models
         public VehicleManagement_Request()
         {
             ItemList = new List<VehicleManagementItem_Request>();
-            GateNumberList = new List<VehicleManagementGateNo_Request>();
+            GateNumberList = new List<AssignGateNo_Request>();
         }
         public DateTime? ReceivingDate { get; set; }
-        public string? PONumber { get; set; }
+        //public string? PONumber { get; set; }
+        public int? POReceivedId { get; set; }
         public int? SupplierId { get; set; }
         public int? ItemId { get; set; }
         public string? TruckNumber { get; set; }
@@ -47,7 +48,7 @@ namespace VMS.Application.Models
         public bool? IsActive { get; set; }
 
         public List<VehicleManagementItem_Request> ItemList { get; set; }
-        public List<VehicleManagementGateNo_Request> GateNumberList { get; set; }
+        public List<AssignGateNo_Request> GateNumberList { get; set; }
     }
 
     public class VehicleManagement_Search : BaseSearchEntity
@@ -61,7 +62,10 @@ namespace VMS.Application.Models
 
     public class VehicleManagement_Response : BaseResponseEntity
     {
+        public int? VisitorId { get; set; }
+        public string? VisitNumber { get; set; }
         public DateTime? ReceivingDate { get; set; }
+        public int? POReceivedId { get; set; }
         public string? PONumber { get; set; }
         public int? SupplierId { get; set; }
         public string? SupplierName { get; set; }
@@ -85,7 +89,7 @@ namespace VMS.Application.Models
         public bool? IsActive { get; set; }
 
         public List<VehicleManagementItem_Response> ItemList { get; set; }
-        public List<VehicleManagementGateNo_Response> GateNumberList { get; set; }
+        public List<AssignGateNo_Response> GateNumberList { get; set; }
     }
 
     public class VehicleManagementItem_Request

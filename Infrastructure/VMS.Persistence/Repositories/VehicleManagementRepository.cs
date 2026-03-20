@@ -26,7 +26,7 @@ namespace VMS.Persistence.Repositories
             DynamicParameters queryParameters = new DynamicParameters();
             queryParameters.Add("@Id", parameters.Id);
             queryParameters.Add("@ReceivingDate", parameters.ReceivingDate);
-            queryParameters.Add("@PONumber", parameters.PONumber);
+            queryParameters.Add("@POReceivedId", parameters.POReceivedId);
             queryParameters.Add("@SupplierId", parameters.SupplierId);
             queryParameters.Add("@ItemId", parameters.ItemId);
             queryParameters.Add("@TruckNumber", parameters.TruckNumber);
